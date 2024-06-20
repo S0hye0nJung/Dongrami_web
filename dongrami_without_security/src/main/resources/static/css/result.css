@@ -1,0 +1,250 @@
+/* result.css */
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: visible;
+}
+
+#page-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.content {
+    padding: 20px;
+    margin-top: 5px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-top: 60px;
+    padding: 20px;
+    gap: 25px;
+}
+
+.cards .card {
+    width: 150px;
+    height: 250px;
+    border: 2px dotted #928f8fbd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 30px;
+    flex-shrink: 0;
+}
+
+.interpretation {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.interpretation div {
+    background-color: inherit;
+    margin-bottom: 30px;
+}
+
+.interpretation .title {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 25px;
+    align-items: center;
+}
+
+.icontent {
+    padding: 20px;
+}
+
+.buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.buttons a {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: #906DAC;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+    text-decoration-line: none;
+}
+
+.buttons a:hover {
+    color: white;
+    text-decoration-line: none;
+}
+
+#share, #save, #write-review {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 45px;
+    margin-left: 13px;
+}
+
+#cha {
+    width: 130px;
+    height: 150px;
+}
+
+#past-content, #present-content, #future-content {
+    word-wrap: break-word;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+.review-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    text-align: left;
+}
+
+.user-name {
+    font-weight: bold;
+    display: block;
+}
+
+.user-role {
+    color: #888;
+}
+
+.review-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-rating label {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.rating-score {
+    font-size: 18px;
+    color: #888;
+    margin-left: 10px;
+}
+
+#rating {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 24px;
+    color: #ddd;
+}
+
+.star.selected {
+    color: #f39c12;
+}
+
+#review-text {
+    width: 90%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    resize: none; /* 텍스트 박스를 고정 크기로 설정 */
+}
+
+#character-count {
+    text-align: right;
+    color: #888;
+    font-size: 14px;
+}
+
+#submit-review {
+    background-color: #f39c12;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit-review:hover {
+    background-color: #e67e22;
+}
