@@ -1,4 +1,4 @@
-  * {
+* {
     /* margin: 0; */
     /* padding: 0; */
     box-sizing: border-box;
@@ -252,320 +252,201 @@
     }
   }
 
+/*본문 영역*/
+
 .content {
-    padding: 20px;
-    margin-top: 5px;
-}
-
-.cards {
     display: flex;
-    justify-content: center; /* 가로 가운데 정렬을 수행합니다 */
-    align-items: center; /* 세로 가운데 정렬을 수행합니다 */
-    margin-bottom: 20px;
-    margin-top: 60px;
-    padding: 20px;
-    gap: 25px; /* 카드 사이의 간격을 설정합니다 */
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin: 50px;
+    position: relative;
+    flex-direction: column;
+    padding: 20px; /* 내부 요소의 여백을 위한 패딩 */
 }
 
-.cards .card {
+/* 카드 관련 스타일 */
+#card-container1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    position: absolute;
+    background-image: url("/images/owl-card.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    backface-visibility: hidden;
+    transform-origin: center;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    pointer-events: auto; /* 각 카드에 마우스 이벤트를 활성화 */
+}
+
+.card .innerCard {
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 자식 요소에서는 마우스 이벤트를 비활성화 */
+}
+
+.center-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-image: url('/images/owl-card.jpg');
+    background-size: contain; /* 이미지가 잘리지 않도록 조정 */
+    background-repeat: no-repeat; /* 이미지 반복 제거 */
+    background-position: center; /* 이미지 중앙 정렬 */
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+
+#owl-image {
+    width:130px;
+    height:150px;
+}
+
+#img_section {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-select {
+    position: absolute;
+    left: 50%;
+    bottom: -600px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 80px;
+}
+
+#card_past, #card_present, #card_future {
     width: 150px;
-    height: 250px;
+    height: 200px;
     border: 2px dotted #928f8fbd;
     display: flex;
     align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    border-radius: 30px;
-    flex-shrink: 0;
+    justify-content: center; /* 내용이 중앙에 오도록 조정 */
+    border-radius: 20%;
 }
 
-.cards img {
-	
-	width:130px;
-	height: 230px;
-	display: flex;
-	justify-content: center;
-	border-radius: 5px;
-}
-.interpretation {
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.interpretation div {
-    background-color: inherit;
-    margin-bottom: 30px;
-}
-
-.interpretation .title {
-    display: flex;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 25px;
-    align-items: center; /* 새로운 스타일 */
-}
-
-.icontent{
-    padding: 20px;
-}
-
-.buttons {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.buttons a {
-    margin: 0 10px;
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    background-color: #906DAC;
-    cursor: pointer;
-    border-radius: 4px;
-    color: white;
-    text-decoration-line: none;
-}
-
-.buttons a:hover {
-    color: white;
-    text-decoration-line: none;
-}
-
-#share, #save, #write-review {
-    font-weight: bold;
-    font-size: 15px;
-}
-
-.img {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    margin-top: 45px;
-    margin-left: 13px;
-}
-
-#cha {
-    width: 130px;
-    height: 150px;
-}
-
-
-#past-content, #present-content, #future-content {
-    word-wrap: break-word; /* 단어 단위로 줄 바꿈 */
-
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
-    border-radius: 10px;
-    text-align: center;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-h2 {
-    margin-bottom: 10px;
-}
-
-p {
-    margin-bottom: 20px;
-}
-
-.review-details {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.review-user {
-    display: flex;
-    align-items: center;
-}
-
-.user-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
-.user-info {
-    text-align: left;
-}
-
-.user-name {
-    font-weight: bold;
-    display: block;
-}
-
-.user-role {
-    color: #888;
-}
-
-.review-rating {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.review-rating label {
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-}
-
-.rating-score {
-    font-size: 18px;
-    color: #888;
-    margin-left: 10px;
-}
-
-#rating {
-    display: flex;
-    gap: 5px;
-    cursor: pointer;
-}
-
-.star {
-    font-size: 24px;
-    color: #ddd;
-}
-
-.star.selected {
-    color: #f39c12;
-}
-
-#review-text {
-    width: 90%;
-    height: 100px;
-    margin-bottom: 10px;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #000;
-    resize: none; /* 텍스트 박스를 고정 크기로 설정 */
-}
-
-#character-count {
-    text-align: right;
-    color: #888;
-    font-size: 14px;
-}
-
-#submit-review {
-    background-color: #f39c12;
-    color: white;
-    padding: 10px 20px;
+.showResult {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -700px;
+    background-color: #906DAC; /* footer의 save 버튼과 같은 색상 */
+    width: 150px;
+    height: 45px;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#submit-review:hover {
-    background-color: #e67e22;
-}
-
-  footer {
-    background-color: #7150bd;
-    color: white;
-    padding: 20px 0;
-    font-family: Arial, sans-serif;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    top: 1400px;
-  }
-  
-  .footer-wrapper {
+    border-radius: 4px; /* footer 버튼과 같은 border-radius */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.showResult a {
+    color: white;
+    text-decoration-line: none;
+}
+
+.showResult a:hover {
+    color: white;
+    text-decoration-line: none;
+}
+.card-labels{
+    position: absolute;
+    bottom: 70%;
+    display: flex;
+    gap: 130px;
+    left: 4%;
+}
+
+#labels_past, #labels_present, #labels_future {
+    width: 100px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 내용이 중앙에 오도록 조정 */
+    font-weight: bold;
+    font-size: 1.rem;
+}
+
+footer {
+  background-color: #7150bd;
+  color: white;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  top: 800px;
+}
+
+.footer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.footer-company {
+  margin-bottom: 20px;
+}
+
+.footer-label {
+  font-size: 40px;
+  font-weight: bold;
+
+}
+
+.footer-companyinfo {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.footer-companyinfo p {
+  margin: 5px 0;
+}
+
+.copyright {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.footer-user {
+  margin-top: 20px;
+}
+
+@media (max-width: 1200px) {
+  footer {
+    top: 1600px; /* 기존에 설정된 top 속성 제거 */
+    bottom: 0; /* 화면 하단에 고정 */
   }
-  
-  .footer-company {
-    margin-bottom: 20px;
+
+  .footer-wrapper {
+    padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
   }
   
   .footer-label {
-    font-size: 40px;
-    font-weight: bold;
-
+    font-size: 50px; /* 폰트 크기를 더 작게 설정 */
   }
   
   .footer-companyinfo {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-top: 20px;
-  }
-  
-  .footer-companyinfo p {
-    margin: 5px 0;
+    font-size: 12px; /* 폰트 크기를 더 작게 설정 */
   }
   
   .copyright {
-    font-size: 12px;
-    margin-top: 10px;
+    font-size: 10px; /* 폰트 크기를 더 작게 설정 */
   }
-  
-  .footer-user {
-    margin-top: 20px;
-  }
-  
-  @media (max-width: 1200px) {
-    footer {
-      top: 1600px; /* 기존에 설정된 top 속성 제거 */
-      bottom: 0; /* 화면 하단에 고정 */
-    }
-  
-    .footer-wrapper {
-      padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
-    }
-    
-    .footer-label {
-      font-size: 50px; /* 폰트 크기를 더 작게 설정 */
-    }
-    
-    .footer-companyinfo {
-      font-size: 12px; /* 폰트 크기를 더 작게 설정 */
-    }
-    
-    .copyright {
-      font-size: 10px; /* 폰트 크기를 더 작게 설정 */
-    }
-  }
-
+}

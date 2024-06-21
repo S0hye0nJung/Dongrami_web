@@ -195,6 +195,14 @@
     height: 50px; /* 버튼 높이 */
 }
 
+@media (max-width: 1200px) {
+    #replyButton1 {
+        left: auto;
+        right: 290px; /* 원하는 위치에 맞게 조정 */
+        top: 580px;
+    }
+}
+
 
 
 #toggleButton1 {
@@ -213,6 +221,15 @@
     width: 100px; /* 버튼 너비 */
     height: 50px; /* 버튼 높이 */
 }
+
+@media (max-width: 1200px) {
+    #toggleButton1 {
+        left: auto;
+        right: 490px; /* 원하는 위치에 맞게 조정 */
+        top: 580px;
+    }
+}
+
 /* .comment-container 클래스 */
 #comment-container1 {
     position: absolute;
