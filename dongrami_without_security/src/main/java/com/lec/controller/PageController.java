@@ -35,11 +35,6 @@ public class PageController {
         return "login";
     }
     
-    @GetMapping("/topic")
-    public String topicPage() {
-        return "topicpage";
-    }
-    
     @GetMapping("/vote")
     public String votePage() {
         return "votepage";

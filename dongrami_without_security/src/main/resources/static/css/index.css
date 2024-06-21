@@ -210,6 +210,7 @@
     }
   
     .logo-container {
+	  margin-top: 20px;
       margin-bottom: 10px;
     }
   
@@ -396,7 +397,7 @@
   
   .topic-box .icon-box {
     width: 150px; /* 아이콘 상자의 너비 */
-    height: 200px; /* 아이콘 상자의 높이를 너비와 동일하게 설정하여 정사각형으로 만듭니다. */
+    height: 250px; /* 아이콘 상자의 높이를 너비와 동일하게 설정하여 정사각형으로 만듭니다. */
     border: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     background-color: #fff; /* 배경색 */
@@ -419,23 +420,13 @@
     object-fit: cover; /* 이미지를 아이콘 상자에 맞게 잘라내기(비율 유지) */
   }
   
-  /* 반응형 디자인 */
-  /* @media (max-width: 100px) {
-    .topic-box .icon-box {
-      width: calc(
-        (100% - 200px) / 3
-      ); /* 중간 크기에서 아이콘 상자의 너비를 동적으로 계산합니다. 
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .topic-box .icon-box {
-      width: calc(
-        (100% - 200px) / 2
-      );  작은 화면에서 아이콘 상자의 너비를 동적으로 계산합니다. 
-    }
-  } */
-  
+  .topic-box .icon-box .separator {
+  width: 80%; /* 실선의 너비를 조정할 수 있습니다. */
+  border: none; /* 기본 테두리 제거 */
+  border-top: 1px solid #ccc; /* 상단에만 실선 추가 */
+  margin: 10px 0; /* 이미지와 텍스트 사이에 간격 추가 */
+}
+   
   @media (max-width: 480px) {
     .topic-box {
       margin-left: 20px; /* 아이콘 상자들의 좌측 마진을 줄입니다. */
@@ -448,6 +439,11 @@
       margin-right: 0; /* 아이콘 상자 사이의 좌우 마진을 제거합니다. */
       margin-bottom: 20px; /* 아이콘 상자 사이의 하단 마진을 조정합니다. */
     }
+  }
+  
+  	.topic-name {
+  font-size: 9px;
+
   }
 
   .collect-button {
@@ -464,8 +460,8 @@
 
 @media (max-width : 1200px) {
   .collect-button {
-    left: 340px;
-    width: 100%;
+    left: 770px;
+    width: 10%;
   }
 }
 
@@ -475,10 +471,6 @@
     box-sizing: border-box;
     border-radius: 10px;
     padding: 20px;
-    /* 초기 상단 마진 */
-    /* margin-top: 400px;  */
-    /* top: 100%; */
-    /* left: 9%; */
     text-align: center;
     width: 63%; /* 고정 너비 */
     height: 150px;
@@ -491,17 +483,12 @@
     text-align: center;
   }
   
-  /*.middle-text p {
-    margin-top: 10px;  p 태그 위 여백 추가 
-  }*/
-  
   .flex-container {
     display: flex;
     padding-top: 50px;
   }
   
   .left-section {
-    /* margin-top: 50px; */
     flex-grow: 1;
     width: 100%;
   }
@@ -509,43 +496,10 @@
   .tarotRankingBubbles {
     width: 1000px;
     height: 500px;
-    margin-left: 50px;
+    margin-left: 30px;
   }
-  
-  /*
-  .olcards {
-    flex-grow: 1;
-    margin-top: 150px;
-    margin-right: 250px;
-    width: 30%;
-  }
-  
-  .olcards li {
-    margin-bottom: 10px;
-    background-color: #e7e1f3;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
-  .olcards .content {
-    display: flex;
-    align-items: center;
-    color: black;
-    font-weight: bold;
-  }
-  
-  .olcards .icon {
-    font-size: 24px;
-    margin-right: 10px;
-  }
-  
-  .olcards .text {
-    font-size: 18px;
-  }
-  */
 
   /* Hover effect for circles */
-
 
   .tarotRankingBubbles .node circle {
     transition: transform 0.3s ease;
@@ -570,7 +524,7 @@
     .tarotRankingBubbles {
       /* 전체 너비 사용 */
       width: 100%;
-      margin-left: 30px;
+      margin-left: 20px;
       /* margin-left: 120px; */
     }
   }
@@ -662,3 +616,54 @@
       font-size: 10px; /* 폰트 크기를 더 작게 설정 */
     }
   }
+  
+
+@keyframes moveRanking1 {
+  0% { transform: translate(10px, 10px); }
+  50% { transform: translate(10px, -10px); }
+  100% { transform: translate(10px, 10px); }
+}
+
+@keyframes moveRanking2 {
+  0% { transform: translate(0px, 0px); }
+  50% { transform: translate(0px, -20px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+@keyframes moveRanking3 {
+  0% { transform: translate(-20px, 0px); }
+  50% { transform: translate(-20px, -20px); }
+  100% { transform: translate(-20px, 0px); }
+}
+
+@keyframes moveRanking4 {
+  0% { transform: translate(-20px, 0px); }
+  50% { transform: translate(-20px, -20px); }
+  100% { transform: translate(-20px, 0px); }
+}
+
+@keyframes moveRanking5 {
+  0% { transform: translate(10px, 0px); }
+  50% { transform: translate(10px, -20px); }
+  100% { transform: translate(10px, 0px); }
+}
+
+.ranking1 { 
+  animation: moveRanking1 5s infinite ease-in-out; 
+}
+
+.ranking2 { 
+  animation: moveRanking2 5s infinite ease-in-out; 
+}
+
+.ranking3 { 
+  animation: moveRanking3 5s infinite ease-in-out; 
+}
+
+.ranking4 { 
+  animation: moveRanking4 5s infinite ease-in-out; 
+}
+
+.ranking5 { 
+  animation: moveRanking5 5s infinite ease-in-out; 
+}

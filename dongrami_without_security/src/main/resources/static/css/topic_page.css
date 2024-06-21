@@ -281,6 +281,13 @@
     margin-left: 20px;
 }
 
+@media (max-width: 1200px) {
+    .content-text a {
+	        margin: 0 auto;
+	        margin-bottom: 20px;
+    }
+}
+
 .content-text a:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -316,45 +323,14 @@
     margin-bottom: 40px;
 }
 
-
-
-
-
-  .card-container {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    margin: 0 auto;
-    background-color: white;
-    transition: background-color 1s ease;
-}
-
-.tarot-card {
-    position: absolute;
-    width: 100px;
-    height: 150px;
-    transform-origin: center bottom;
-    opacity: 0;
-    transition: transform 0.5s ease, opacity 0.5s ease;
-    left: 50%;
-    top: 60px;
-}
-
-.tarot-card img {
-    width: 100%;
-    height: auto;
-}
-
-
   footer {
     background-color: #7150bd;
     color: white;
     padding: 20px 0;
     font-family: Arial, sans-serif;
     position: relative;
-    bottom: 0;
+    top: 150px;
     width: 100%;
-    top: 1400px;
   }
   
   .footer-wrapper {
@@ -399,7 +375,7 @@
   
   @media (max-width: 1200px) {
     footer {
-      top: 1600px; /* 기존에 설정된 top 속성 제거 */
+      top: 150px; /* 기존에 설정된 top 속성 제거 */
       bottom: 0; /* 화면 하단에 고정 */
     }
   
