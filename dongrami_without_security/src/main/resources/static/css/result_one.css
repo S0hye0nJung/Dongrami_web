@@ -1,0 +1,290 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: visible;
+    /* background: linear-gradient(to bottom, transparent 0%, #ffffff 50%, #f7edfa 50%); */
+}
+
+#page-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+#nav-section {
+    background: linear-gradient(to right, rgb(55, 56, 119) 2%, rgb(150, 114, 180));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    overflow: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+#left-section {
+    flex: 1;
+    position: relative;
+    overflow: visible;
+}
+
+.logo-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 8em;
+}
+
+.logo-text {
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 22px;
+    transition: opacity 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.hover-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.logo-text:hover {
+    opacity: 0;
+}
+
+.logo-text:hover + .hover-content {
+    opacity: 1;
+}
+
+.hover-text {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: large;
+    margin: 0;
+}
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+    background: url('../images/mainlogo.png') no-repeat center center;
+    background-size: contain;
+    animation: spin 2s infinite linear;
+    margin: 0;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#center-section {
+    flex: 2;
+}
+
+#right-section {
+    flex: 1;
+    text-align: right;
+    margin-right: 5em;
+}
+
+#right-section a {
+    margin-left: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 50;
+    font-size: 15px;
+}
+
+#right-section a:hover {
+    color: #e97770;
+}
+
+#right-section .kakao-icon img {
+    width: 26px;
+    height: 26px;
+    vertical-align: middle;
+    margin-bottom: 0.5em;
+}
+
+#nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+}
+
+#nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    margin: 0px;
+}
+
+#nav ul li {
+    position: relative;
+}
+
+#nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 200;
+    padding: 10px;
+    font-size: 17px;
+}
+
+#nav ul li a:hover {
+    color: #e97770;
+}
+
+#nav ul li ul {
+    background-color: rgb(56 43 105);
+    padding: 1.25em 1em 1.25em 1em;
+    border-radius: 0.35em;
+    box-shadow: inset 0px 0px 1px 1px rgba(255, 255, 255, 0.25);
+    min-width: 12em;
+    text-align: left;
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+    display: none;
+    left: 0;
+}
+
+#nav ul li:hover ul {
+    display: block !important;
+}
+
+#nav ul li ul li {
+    width: 100%;
+}
+
+#nav ul li ul li a {
+    padding: 10px 20px;
+    color: white;
+    font-weight: 400;
+    display: block;
+}
+
+#nav ul li ul li a:hover {
+    background: #f4f4f4;
+    color: #e97770;
+}
+
+.content {
+    padding: 20px;
+    margin-top: 5px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center; /* 가로 가운데 정렬을 수행합니다 */
+    align-items: center; /* 세로 가운데 정렬을 수행합니다 */
+    margin-bottom: 20px;
+    margin-top: 60px;
+    padding: 20px;
+    gap: 25px; /* 카드 사이의 간격을 설정합니다 */
+}
+
+.cards .card {
+    width: 150px;
+    height: 250px;
+    border: 2px dotted #928f8fbd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 30px;
+    flex-shrink: 0;
+}
+
+
+.interpretation {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.interpretation div {
+    background-color: inherit;
+    margin-bottom: 30px;
+}
+
+.interpretation .title {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 25px;
+    align-items: center; /* 새로운 스타일 */
+}
+
+.icontent{
+    padding: 20px;
+}
+
+.buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.buttons a {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: #906DAC;
+    cursor: pointer;
+    border-radius: 4px;
+    color: white;
+    text-decoration-line: none;
+}
+
+.buttons a:hover {
+    color: white;
+    text-decoration-line: none;
+}
+
+#share, #save, #write-review {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    margin-top: 45px;
+    margin-left: 13px;
+}
+
+#cha {
+    width: 130px;
+    height: 150px;
+}
+
+
+#past-content, #present-content, #future-content {
+    word-wrap: break-word; /* 단어 단위로 줄 바꿈 */
+
+}
+
+
+
