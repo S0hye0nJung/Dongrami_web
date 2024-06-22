@@ -1,6 +1,7 @@
 package com.lec.dto;
 
 import com.lec.entity.WebReading;
+
 import com.lec.entity.Subcategory;
 import com.lec.entity.Card;
 import lombok.AllArgsConstructor;
@@ -39,3 +40,4 @@ public class WebReadingDTO {
                 .build();
     }
 }
+

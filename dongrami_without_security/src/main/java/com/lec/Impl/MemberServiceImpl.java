@@ -30,9 +30,11 @@ public class MemberServiceImpl implements MemberService{
 		Date createDate = getCurrentDate();
 		
 		member.setUserId(userId);
+
 //		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 //		member.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
 //		memberrepository.save(member);
+
 		
 		return "index"; //회원 가입 완료 후 반환되는 템플릿 명
 	}

@@ -17,10 +17,12 @@ public class WebReading {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name="web_reading_id", nullable = false)
     private int webReadingId;
 
     @Column(name="reading1", columnDefinition = "text")
+
     private String reading1;
 
     @Column(name = "reading2", columnDefinition = "text")

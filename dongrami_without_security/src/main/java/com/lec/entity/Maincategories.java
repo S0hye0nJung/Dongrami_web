@@ -28,5 +28,4 @@ public class Maincategories {
 		this.maincategory_id = maincategory_id;
 		this.maincategory_name = maincategory_name;
 	}
-
 }

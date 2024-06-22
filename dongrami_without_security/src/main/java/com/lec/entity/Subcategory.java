@@ -35,6 +35,7 @@ public class Subcategory {
     @JoinColumn(name = "maincategory_id", referencedColumnName = "maincategory_id", nullable = false)
     private Maincategories maincategory;
 
+
 	@Builder
 	public Subcategory(int subcategory_id, String subcategory_name, int count, String bubble_slak_name, Maincategories maincategory) {
 		super();
@@ -44,6 +45,12 @@ public class Subcategory {
 		this.bubble_slak_name = bubble_slak_name;
 		this.maincategory = maincategory;
 	}
+
+    
+    public String getBubble_slak_name() {
+        return this.bubble_slak_name;
+    }
+
 
 	
 }

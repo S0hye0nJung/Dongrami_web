@@ -1,3 +1,4 @@
+
 console.log("Tarot script loaded");
 document.addEventListener("DOMContentLoaded", function() {
     console.log("DOMContentLoaded event fired");
@@ -14,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const delayBetweenCards = 15;
     let isCardsFanned = false;
     let radius = 1000;
+
     let owlCenterX, owlCenterY;
     let selectedCard = null;
     let selectedCardStartTime = null;
@@ -21,26 +23,31 @@ document.addEventListener("DOMContentLoaded", function() {
     const pastDiv = document.getElementById('card_past');
     const presentDiv = document.getElementById('card_present');
     const futureDiv = document.getElementById('card_future');
+
     console.log("container:", document.getElementById('card-container1'));
-    
+
     const cards = [];
     let selectedCount = 0; // 선택된 카드 수를 추적하기 위한 변수
 
     function updateOwlCenter() {
         const owlRect = owlImage.getBoundingClientRect();
         const contentRect = content.getBoundingClientRect();
-        
+       
         owlCenterX = owlRect.left + owlRect.width / 2 - contentRect.left;
         console.log("owlCenterX: ", owlCenterX);
         owlCenterY = owlRect.top + owlRect.height / 2 - contentRect.top;
         console.log("owlCenterY: ", owlCenterY);
+
     }
 
     function resizeHandler() {
         const cardWidth = container.offsetWidth * 0.06;
+
         console.log("cardwidth: ", cardWidth);
         const cardHeight = 500; //여기부터 문제
         console.log("cardHeight: ", cardHeight);
+        // const cardHeight = container.offsetHeight * 0.16;
+
         const contentWidth = content.offsetWidth;
         const contentHeight = content.offsetHeight;
     
@@ -53,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("initcardwidth: ", cardWidth);
         initialCard.style.height = `${cardHeight}px`;
         console.log("initcardheight: ", cardHeight);
+
         initialCard.style.position = 'absolute';
         initialCard.style.zIndex = '1';
     
@@ -84,20 +92,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
     owlImage.addEventListener('load', updateOwlCenter);
 
+
     console.log("initialCard:", document.getElementById('initial-card'));
+
 
     function fanCards() {
         if (isCardsFanned) return;
         isCardsFanned = true;
         initialCard.style.display = 'none';
         const cardWidth = container.offsetWidth * 0.06;
+
         const cardHeight = 300;
+        // const cardHeight = container.offsetHeight * 0.16;
+
         updateOwlCenter();
 
         for (let i = 0; i < cardCount; i++) {
             setTimeout(() => {
+
                 const angle = (i / cardCount) * visibleAngleRange + startAngle; // 각도 범위를 조정하여 카드가 부엉이 이미지를 감싸도록 함
                 const x = owlCenterX + radius * Math.cos(angle) - cardWidth / 2;
+               // const x = owlCenterX + radius * Math.cos(angle) - cardWidth / 2 - 20; // 중앙에서 왼쪽으로 20px 이동
+
+              
                 const y = owlCenterY + radius * Math.sin(angle) - cardHeight / 2;
                 const card = document.createElement('div');
                 card.className = 'card';
@@ -105,8 +122,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 card.style.height = `${cardHeight}px`;
                 card.style.transform = `translate(${x}px, ${y}px) rotate(${angle + Math.PI / 2}rad)`;
                 card.style.opacity = 1;
+
                 card.style.position = 'absolute'; // 카드를 절대 위치로 설정
                 card.style.zIndex = '2'; // 초기 카드보다 위에 위치하도록 z-index 설정
+
                 container.appendChild(card);
 
                 const cardObj = {
@@ -117,6 +136,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     isMovedToDiv: false, // 카드가 div로 이동되었는지 여부를 추적하기 위한 플래그
                 };
                 cards.push(cardObj);
+
+
+                // 함수 참조를 변수에 저장하여 removeEventListener에서 사용 가능하게 함
 
                 function onMouseOver(e) {
                     e.preventDefault();
@@ -175,4 +197,5 @@ document.addEventListener("DOMContentLoaded", function() {
         }, cardCount * delayBetweenCards);
     }
     console.log("owlImage:", document.getElementById('owl-image'));
+
 });

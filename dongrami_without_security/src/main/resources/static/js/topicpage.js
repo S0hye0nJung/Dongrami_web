@@ -1,14 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
     const links = document.querySelectorAll('.content-text a');
 
-    // localStorage에서 클릭 수 초기화
+
+    // 클릭 수 초기화 및 정렬을 서버 데이터 기준으로 처리
     links.forEach(link => {
-        const id = link.getAttribute('id');
-        const clickCount = localStorage.getItem(id) || 0;
-        link.dataset.clickCount = clickCount;
+        const subcategoryId = link.dataset.subcategoryId;
+        $.ajax({
+            type: 'GET',
+            url: `/getSubcategory/${subcategoryId}`, // 서버에서 해당 서브카테고리의 정보를 가져오는 엔드포인트
+            success: function(response) {
+                const clickCount = response.count || 0;
+                link.dataset.clickCount = clickCount;
+                sortLinks(); // 데이터를 받은 후 링크 정렬
+            },
+            error: function(error) {
+                console.log('Error fetching subcategory info', error);
+            }
+        });
     });
 
-    // 클릭 수에 따라 링크를 정렬하는 함수
+
+    // 클릭 수를 증가시키는 이벤트 리스너
+    links.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault(); // 링크의 기본 동작 방지
+            const id = link.getAttribute('id');
+
+            let clickCount = parseInt(link.dataset.clickCount) + 1; // 클릭 수 1 증가
+
+            localStorage.setItem(id, clickCount);
+            link.dataset.clickCount = clickCount;
+
+            // 클릭 후 링크 정렬
+            sortLinks();
+
+
+            // 서버로 데이터 전송
+            const subcategoryId = link.dataset.subcategoryId;
+            $.ajax({
+                type: 'POST',
+                url: '/updateClickCount',
+                data: JSON.stringify({ subcategoryId: subcategoryId, count: clickCount }),
+                contentType: 'application/json',
+                success: function(response) {
+                    console.log('Click count updated');
+                },
+                error: function(error) {
+                    console.log('Error updating click count', error);
+                }
+            });
+        });
+    });
+
+    // 링크를 클릭 수에 따라 정렬하는 함수
     const sortLinks = () => {
         const sortedLinks = Array.from(links).sort((a, b) => {
             return b.dataset.clickCount - a.dataset.clickCount;
@@ -18,45 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         sortedLinks.forEach(link => container.appendChild(link));
     };
 
-    // 클릭 수를 증가시키는 이벤트 리스너
-    links.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault(); // 링크의 기본 동작 방지
-            const id = link.getAttribute('id');
-            let clickCount = localStorage.getItem(id) || 0;
-            clickCount++;
-            localStorage.setItem(id, clickCount);
-            link.dataset.clickCount = clickCount;
-
-            // 클릭 후 링크 정렬
-            sortLinks();
-        });
-    });
-
-    // 초기 정렬
+    // 초기 링크 정렬
     sortLinks();
 });
 
-/*
-document.querySelectorAll('a[data-click-count]').forEach(function(element) {
-    element.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        const subcategoryId = this.id.replace('link', ''); // id가 "link1", "link2" 등이라고 가정
-        const url = `/api/subcategories/${subcategoryId}/increment`;
-
-        fetch(url, {
-            method: 'POST',
-        }).then(response => {
-            if (response.ok) {
-                let clickCount = parseInt(this.getAttribute('data-click-count')) + 1;
-                this.setAttribute('data-click-count', clickCount);
-                console.log('Click count updated successfully');
-            } else {
-                console.error('Failed to update click count');
-            }
-        }).catch(error => {
-            console.error('Error:', error);
-        });
-    }); 
-});*/
