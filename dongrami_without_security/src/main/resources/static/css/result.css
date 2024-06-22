@@ -1,4 +1,4 @@
-/* result.css */
+
 * {
     margin: 0px;
     padding: 0px;
@@ -7,12 +7,305 @@
 body {
     font-family: Arial, sans-serif;
     overflow: visible;
+    /* background: linear-gradient(to bottom, transparent 0%, #ffffff 50%, #f7edfa 50%); */
 }
 
 #page-wrapper {
     width: 100%;
-    margin: 0 auto;
-    max-width: 1200px;
+    text-align: center;
+    padding: 10px; /* Add padding for spacing */
+  }
+  
+  #nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+  }
+  
+  #nav ul li {
+    position: relative;
+    margin: 0 50px;
+  }
+  
+  #nav ul li a {
+    color: #888;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: color 0.3s;
+    position: relative; /* 추가: 상대 위치 지정 */
+    white-space: nowrap; /* Prevent text from wrapping */
+  }
+  
+  #nav ul li a:hover::after {
+    content: "";
+    position: absolute;
+    left: 50%; /* 선을 가운데로 맞추기 위해 왼쪽 위치를 50%로 설정 */
+    bottom: -2px; /* 밑줄 위치 조정 */
+    width: 50%; /* 선의 넓이를 줄임 */
+    height: 5px; /* 밑줄 두께 조정 */
+    background-color: #936fb0; /* 원하는 밑줄 색상 */
+    transform: translateX(-50%); /* 가운데 정렬을 위해 이동 */
+  }
+  
+  #nav ul li ul {
+    background-color: #38356a;
+    padding: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: none;
+  }
+  
+  #nav ul li:hover ul {
+    display: block;
+  }
+  
+  #nav ul li ul li {
+    width: 100%;
+  }
+  
+  #nav ul li ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 20px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+  }
+  
+  #nav ul li ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .logo-container {
+	  margin-top: 20px;
+      margin-bottom: 10px;
+    }
+  
+    #right-section {
+      margin-top: 10px;
+      text-align: center;
+    }
+  
+    #nav-section {
+      padding: 15px 0;
+      margin-top: 0; /* Adjust margin for smaller screens */
+    }
+  
+    #center-section {
+      display: none;
+    }
+  
+    #nav ul {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #nav ul li {
+      margin: 5px 0;
+    }
+  
+    #nav ul li ul {
+      top: 0;
+      left: 100%;
+      transform: translateY(-50%);
+    }
+  
+    #nav ul li:hover ul {
+      display: none;
+    }
+  
+    #nav ul li ul li {
+      width: auto;
+    }
+  }
+
+#nav-section {
+    background: linear-gradient(to right, rgb(55, 56, 119) 2%, rgb(150, 114, 180));
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    overflow: visible;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+#left-section {
+    flex: 1;
+    position: relative;
+    overflow: visible;
+}
+
+.logo-container {
+    position: relative;
+    display: inline-block;
+    margin-left: 8em;
+}
+
+.logo-text {
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 22px;
+    transition: opacity 0.3s ease-in-out;
+    display: inline-block;
+}
+
+.hover-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.logo-text:hover {
+    opacity: 0;
+}
+
+.logo-text:hover + .hover-content {
+    opacity: 1;
+}
+
+.hover-text {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: large;
+    margin: 0;
+}
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+    background: url('../images/mainlogo.png') no-repeat center center;
+    background-size: contain;
+    animation: spin 2s infinite linear;
+    margin: 0;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#center-section {
+    flex: 2;
+}
+
+#right-section {
+    flex: 1;
+    text-align: right;
+    margin-right: 5em;
+}
+
+#right-section a {
+    margin-left: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 50;
+    font-size: 15px;
+}
+
+#right-section a:hover {
+    color: #e97770;
+}
+
+#right-section .kakao-icon img {
+    width: 26px;
+    height: 26px;
+    vertical-align: middle;
+    margin-bottom: 0.5em;
+}
+
+#nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2;
+}
+
+#nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    margin: 0px;
+}
+
+#nav ul li {
+    position: relative;
+}
+
+#nav ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 200;
+    padding: 10px;
+    font-size: 17px;
+}
+
+#nav ul li a:hover {
+    color: #e97770;
+}
+
+#nav ul li ul {
+    background-color: rgb(56 43 105);
+    padding: 1.25em 1em 1.25em 1em;
+    border-radius: 0.35em;
+    box-shadow: inset 0px 0px 1px 1px rgba(255, 255, 255, 0.25);
+    min-width: 12em;
+    text-align: left;
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+    display: none;
+    left: 0;
+}
+
+#nav ul li:hover ul {
+    display: block !important;
+}
+
+#nav ul li ul li {
+    width: 100%;
+}
+
+#nav ul li ul li a {
+    padding: 10px 20px;
+    color: white;
+    font-weight: 400;
+    display: block;
+}
+
+#nav ul li ul li a:hover {
+    background: #f4f4f4;
+    color: #e97770;
 }
 
 .content {
@@ -22,12 +315,12 @@ body {
 
 .cards {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* 가로 가운데 정렬을 수행합니다 */
+    align-items: center; /* 세로 가운데 정렬을 수행합니다 */
     margin-bottom: 20px;
     margin-top: 60px;
     padding: 20px;
-    gap: 25px;
+    gap: 25px; /* 카드 사이의 간격을 설정합니다 */
 }
 
 .cards .card {
@@ -40,6 +333,16 @@ body {
     cursor: pointer;
     border-radius: 30px;
     flex-shrink: 0;
+}
+
+
+.cards img {
+	
+	width:130px;
+	height: 230px;
+	display: flex;
+	justify-content: center;
+	border-radius: 5px;
 }
 
 .interpretation {
@@ -57,10 +360,10 @@ body {
     justify-content: center;
     font-weight: bold;
     font-size: 25px;
-    align-items: center;
+    align-items: center; /* 새로운 스타일 */
 }
 
-.icontent {
+.icontent{
     padding: 20px;
 }
 
@@ -103,11 +406,12 @@ body {
     height: 150px;
 }
 
+
 #past-content, #present-content, #future-content {
-    word-wrap: break-word;
+    word-wrap: break-word; /* 단어 단위로 줄 바꿈 */
+
 }
 
-/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -248,3 +552,80 @@ p {
 #submit-review:hover {
     background-color: #e67e22;
 }
+
+
+  footer {
+    background-color: #7150bd;
+    color: white;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    top: 1400px;
+  }
+  
+  .footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .footer-company {
+    margin-bottom: 20px;
+  }
+  
+  .footer-label {
+    font-size: 40px;
+    font-weight: bold;
+
+  }
+  
+  .footer-companyinfo {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  
+  .footer-companyinfo p {
+    margin: 5px 0;
+  }
+  
+  .copyright {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .footer-user {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 1200px) {
+    footer {
+      top: 1600px; /* 기존에 설정된 top 속성 제거 */
+      bottom: 0; /* 화면 하단에 고정 */
+    }
+  
+    .footer-wrapper {
+      padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
+    }
+    
+    .footer-label {
+      font-size: 50px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .footer-companyinfo {
+      font-size: 12px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .copyright {
+      font-size: 10px; /* 폰트 크기를 더 작게 설정 */
+    }
+  }
+
+
