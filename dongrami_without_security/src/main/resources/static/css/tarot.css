@@ -210,6 +210,7 @@
     }
   
     .logo-container {
+	  margin-top: 20px;
       margin-bottom: 10px;
     }
   
@@ -251,147 +252,206 @@
     }
   }
 
-  .container {
-    margin-left: 60px;
-    margin-bottom: 50px;
-  }
 
-  .container > #content-header > h2 {
-    margin-left: 40px;
-}
+/*본문 영역*/
 
-  .content-text {
+.content {
     display: flex;
-    flex-wrap: wrap;
-    max-width: 2000px;
-    margin-left: 40px;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin: 50px;
+    position: relative;
+    flex-direction: column;
+    padding: 20px; /* 내부 요소의 여백을 위한 패딩 */
 }
 
-.content-text a {
-    display: flex; /* Flex container로 설정 */
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid white;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
-    color: #333;
-    transition: transform 0.3s, box-shadow 0.3s;
-    width: 590px;
-    margin-left: 20px;
+/* 카드 관련 스타일 */
+
+#card-container1 {
+
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.card {
+    position: absolute;
+    background-image: url("/images/owl-card.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    backface-visibility: hidden;
+    transform-origin: center;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    pointer-events: auto; /* 각 카드에 마우스 이벤트를 활성화 */
+}
+
+.card .innerCard {
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* 자식 요소에서는 마우스 이벤트를 비활성화 */
+}
+
+.center-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-image: url('/images/owl-card.jpg');
+    background-size: contain; /* 이미지가 잘리지 않도록 조정 */
+    background-repeat: no-repeat; /* 이미지 반복 제거 */
+    background-position: center; /* 이미지 중앙 정렬 */
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+}
+
+#owl-image {
+    width:130px;
+    height:150px;
+}
+
+#img_section {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.card-select {
+    position: absolute;
+    left: 50%;
+    bottom: -600px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 80px;
+}
+
+#card_past, #card_present, #card_future {
+    width: 150px;
+    height: 200px;
+    border: 2px dotted #928f8fbd;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 내용이 중앙에 오도록 조정 */
+    border-radius: 20%;
+}
+
+.showResult {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -700px;
+    background-color: #906DAC; /* footer의 save 버튼과 같은 색상 */
+    width: 150px;
+    height: 45px;
+    border: none;
+    border-radius: 4px; /* footer 버튼과 같은 border-radius */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.showResult a {
+    color: white;
+    text-decoration-line: none;
+}
+
+.showResult a:hover {
+    color: white;
+    text-decoration-line: none;
+}
+.card-labels{
+    position: absolute;
+    bottom: 70%;
+    display: flex;
+    gap: 130px;
+    left: 4%;
+}
+
+#labels_past, #labels_present, #labels_future {
+    width: 100px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 내용이 중앙에 오도록 조정 */
+    font-weight: bold;
+    font-size: 1.rem;
+}
+
+
+footer {
+  background-color: #7150bd;
+  color: white;
+  padding: 20px 0;
+  font-family: Arial, sans-serif;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  top: 800px;
+}
+
+.footer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.footer-company {
+  margin-bottom: 20px;
+}
+
+.footer-label {
+  font-size: 40px;
+  font-weight: bold;
+
+}
+
+.footer-companyinfo {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 20px;
+}
+
+.footer-companyinfo p {
+  margin: 5px 0;
+}
+
+.copyright {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.footer-user {
+  margin-top: 20px;
 }
 
 @media (max-width: 1200px) {
-    .content-text a {
-	        margin: 0 auto;
-	        margin-bottom: 20px;
-    }
-}
-
-.content-text a:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.content-img {
-    width: 20%; /* 이미지 영역의 너비 */
-    flex-shrink: 0; /* 이미지가 Flex item 내에서 줄어들지 않도록 설정 */
-}
-
-.content-img img {
-    width: 100%;
-    height: auto;
-}
-
-.content-text .content-text {
-    flex: 1; /* 텍스트 영역이 남은 공간을 모두 차지하도록 설정 */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 2px;
-    margin-top: 20px;
-}
-
-.title-name {
-    font-size: 14px;
-    color: #888;
-    margin-bottom: 40px;
-}
-
   footer {
-    background-color: #7150bd;
-    color: white;
-    padding: 20px 0;
-    font-family: Arial, sans-serif;
-    position: relative;
-    top: 150px;
-    width: 100%;
+    top: 1600px; /* 기존에 설정된 top 속성 제거 */
+    bottom: 0; /* 화면 하단에 고정 */
   }
-  
+
   .footer-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .footer-company {
-    margin-bottom: 20px;
+    padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
   }
   
   .footer-label {
-    font-size: 40px;
-    font-weight: bold;
-
+    font-size: 50px; /* 폰트 크기를 더 작게 설정 */
   }
   
   .footer-companyinfo {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-top: 20px;
-  }
-  
-  .footer-companyinfo p {
-    margin: 5px 0;
+    font-size: 12px; /* 폰트 크기를 더 작게 설정 */
   }
   
   .copyright {
-    font-size: 12px;
-    margin-top: 10px;
+    font-size: 10px; /* 폰트 크기를 더 작게 설정 */
   }
-  
-  .footer-user {
-    margin-top: 20px;
-  }
-  
-  @media (max-width: 1200px) {
-    footer {
-      top: 150px; /* 기존에 설정된 top 속성 제거 */
-      bottom: 0; /* 화면 하단에 고정 */
-    }
-  
-    .footer-wrapper {
-      padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
-    }
-    
-    .footer-label {
-      font-size: 50px; /* 폰트 크기를 더 작게 설정 */
-    }
-    
-    .footer-companyinfo {
-      font-size: 12px; /* 폰트 크기를 더 작게 설정 */
-    }
-    
-    .copyright {
-      font-size: 10px; /* 폰트 크기를 더 작게 설정 */
-    }
-  }
+}
+

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="./css/result.css" />
+    <link rel="stylesheet" href="./css/result_one.css" />
 </head>
 <body class="homepage is-preload">
     <div id="page-wrapper">
@@ -56,72 +56,30 @@
 
         <div class="content">
             <div class="img">
-                <img src="./images/basic_tarot.png" alt="" id="cha">
+                <img src="./images/basic_tarot.png" alt="", id="cha">
             </div>
             <div class="cards">
                 <div class="card" data-position="과거">과거</div>
-                <div class="card" data-position="현재">현재</div>
-                <div class="card" data-position="미래">미래</div>
             </div>
             <div class="interpretation">
                 <div>
                     <span class="title">과거</span>
-                    <div class="icontent" id="past-content">해석
-                    </div>
-                </div>
-                <div>
-                    <span class="title">현재</span>
-                    <div class="icontent" id="present-content">해석1
-                    </div>
-                </div>
-                <div>
-                    <span class="title">미래</span>
-                    <div class="icontent" id="future-content">해석2
+                    <div class="icontent" id="past-content">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
+                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+                        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
+                        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
                     </div>
                 </div>
             </div>
             <div class="buttons">
-                <a href="javascript:void(0);" id="share">공유</a>
-                <a href="javascript:void(0);" id="save">저장</a>
-                <a href="javascript:void(0);" id="write-review">리뷰 쓰기</a>
-            </div>
-        </div>
-
-        <!-- Review Modal -->
-        <div id="review-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>여행</h2>
-                <p>당신의 운명을 확인하셨죠? 그 경험을 나누어주세요!</p>
-                <form id="reviewForm" method="post" action="/submitReview">
-                    <div class="review-details">
-                        <div class="review-user">
-                            <img src="images/user-avatar.png" alt="User Avatar" class="user-avatar">
-                            <div class="user-info">
-                                <span class="user-name">닉네임</span>
-                                <span class="user-role">직책</span>
-                            </div>
-                        </div>
-                        <div class="review-rating">
-                            <label for="rating">평점 <span class="rating-score">0점</span></label>
-                            <div id="rating">
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                                <span class="star">&#9733;</span>
-                            </div>
-                        </div>
-                    </div>
-                    <textarea id="review-text" name="reviewText" placeholder="100자 미만 작성해주세요"></textarea>
-                    <div id="character-count">0/100</div>
-                    <input type="hidden" id="ratingScore" name="ratingScore" value="5">
-                    <button type="submit" id="submit-review">리뷰 작성 완료</button>
-                </form>
+                <a href="share" id="share">공유</a>
+                <a href="save" id="save">저장</a>
+                <a href="review" id="write-review">리뷰 쓰기</a>
             </div>
         </div>
 
         <!-- Scripts -->
+        
         <script src="./js/result.js"></script>
     </div>
 </body>
