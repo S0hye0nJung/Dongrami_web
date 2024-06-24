@@ -47,10 +47,6 @@ public class Review {
     @JoinColumn(name = "subcatogory_id", referencedColumnName = "subcategory_id", nullable = false)
     private Subcategory subcategory;
 
-    @ManyToOne
-    @JoinColumn(name = "result_id", referencedColumnName = "result_id", nullable = false)
-    private SavedResult savedResult;
-
     @Builder
 	public Review(int reviewId, int rating, String reviewText, Date reviewCreate, Date reviewModify, Member member,
 			Subcategory subcategory, SavedResult savedResult) {
@@ -62,6 +58,5 @@ public class Review {
 		this.reviewModify = reviewModify;
 		this.member = member;
 		this.subcategory = subcategory;
-		this.savedResult = savedResult;
 	}
 }

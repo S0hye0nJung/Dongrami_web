@@ -1,5 +1,12 @@
 package com.lec.service;
 
-public class ReviewService {
+import java.util.List;
 
+import com.lec.entity.Review;
+
+public interface ReviewService {
+
+    List<Review> getAllReviews();
+
+    void deleteReview(int reviewId);
 }
