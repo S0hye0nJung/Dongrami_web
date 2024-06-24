@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" th:href="@{/css/mypage.css}">
-  <title>Document</title>
+  <title>My Page</title>
 </head>
 <body>
   
@@ -43,26 +43,10 @@
           <ul>
               <li>
                   <a href="#">HOME</a>
-                  <!--
-                  <ul>
-                      <li><a href="#">짝사랑</a></li>
-                      <li><a href="#">연인</a></li>
-                      <li><a href="#">재회</a></li>
-                      <li><a href="#">미래 연인</a></li>
-                      <li><a href="#">결혼</a></li>
-                  </ul>
-                  -->
               </li>
               <li><a href="no-sidebar.html">타로 보러가기</a></li>
               <li>
                   <a href="#">투표</a>
-                  <!--
-                  <ul>
-                      <li><a href="#">합격운</a></li>
-                      <li><a href="#">일 잘풀릴까?</a></li>
-                      <li><a href="#">직업추천</a></li>
-                  </ul>
-                  -->
               </li>
               <li><a th:href="@{/review}">후기</a></li>
           </ul>
@@ -76,6 +60,7 @@
     <img th:src="@{/images/basic.png}" alt="Profile Photo" class="profile-photo" style="border: 1px solid #ccc;">
     <h2 class="username" th:text="${session.user.name}">사용자 이름</h2>
     <a href="#" class="edit-link"><img th:src="@{/images/gear.png}" alt="Edit"></a>
+	<!-- <a href="@{/#}" class="edit-link"><img th:src="@{/images/gear.png}" alt="Edit"></a> -->
   </div>
 
   <!-- Menu -->
@@ -83,6 +68,7 @@
       <div class="menu">
         <div class="past-menu">
           <a href="#">이전에 봤던 결과 보기</a>
+		  <!-- <a href="@{/#}">이전에 봤던 결과 보기</a> -->
         </div>
         <div class="comment">
           <a th:href="@{/mycomments}">내가 쓴 댓글</a>
