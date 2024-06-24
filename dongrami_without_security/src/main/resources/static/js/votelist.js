@@ -1,36 +1,19 @@
-function getRandomInt(min, max) {
-    // min (포함)과 max (포함) 사이의 정수 난수를 반환합니다.
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+document.addEventListener("DOMContentLoaded", function() {
+    const voteListDiv = document.getElementById('vote-list');
 
-document.addEventListener("DOMContentLoaded", function(){
-	const voteListDiv = document.getElementById('vote-main');
-	
-	fetch('/api/votes')
+    // 서버에서 투표 리스트 가져오기
+    fetch('/api/votes')
         .then(response => response.json())
-        .then(data=>{
-        if (data && data.length > 0) {
-                // 랜덤한 인덱스 선택
-                const randomIndex = getRandomInt(0, data.length - 1);
-                const randomVote = data[randomIndex];
-                const randomImage = randomVote.voteImage;
-                const randomQuestion = randomVote.question;
-                const randomOption1 = randomVote.option1;
-                const randomOption2 = randomVote.option2;
-
-                // 투표 요소 생성
-                const voteDiv = createVoteElement(randomVote);
+        .then(data => {
+            data.forEach(vote => {
+                const voteDiv = createVoteElement(vote);
                 voteListDiv.appendChild(voteDiv);
+            });
+        })
+        .catch(error => console.error('Error fetching votes:', error));
 
-                // 초기 이미지 설정
-                
-            } else {
-                $(".image-container").html('<p>No votes found</p>');
-            }
-        });
-        function createVoteElement(vote) {
+    // Vote 엘리먼트 생성 함수
+    function createVoteElement(vote) {
         const voteDiv = document.createElement('div');
         voteDiv.classList.add('vote-item');
 
@@ -82,21 +65,17 @@ document.addEventListener("DOMContentLoaded", function(){
     	`;
         voteDiv.appendChild(barContainer2);
 
-        const replyContainer = document.createElement('div');
-        replyContainer.classList.add('reply-container');
-        replyContainer.innerHTML = `
-            <button id="replyButton">반응 보기</button>
-        `;
-        voteDiv.appendChild(replyContainer);
-
-        const replyButton = replyContainer.querySelector('#replyButton');
-        replyButton.addEventListener('click', function() {
-            window.location.href = '/mainvote'; // 이동할 페이지 경로 설정
-        });
+                const replyContainer = document.createElement('div');
+                replyContainer.classList.add('reply-container');
+                replyContainer.innerHTML = `
+                    <button id="replyButton">반응 보기</button>
+                `;
+                voteDiv.appendChild(replyContainer);
 
         return voteDiv;
     }
-     window.voteOption = function(voteId, option) {
+
+    window.voteOption = function(voteId, option) {
         fetch(`/api/votes/${voteId}`, {
             method: 'PUT',
             headers: {
@@ -134,7 +113,9 @@ document.addEventListener("DOMContentLoaded", function(){
 
     bar1.style.width = `${percentage1}%`;
     bar2.style.width = `${percentage2}%`;
-    $("#replyButton").css("display", "block");
-	}
+}
+const replyButton = replyContainer.querySelector('#replyButton');
+replyButton.addEventListener('click', function() {
+    window.location.href = '/mainvote.html'; // 이동할 페이지 경로
 });
-
+});
