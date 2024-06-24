@@ -1,181 +1,172 @@
-// assets/js/comments.js
-
-let currentPage = 1;
-const itemsPerPage = 10;
-const comments = [{ text: "홍길동의 첫 번째 댓글 내용이 여기에 표시됩니다.", date: "2023-06-01" }]; // 예시 댓글 하나
-let activeDropdown = null;
-let editIndex = null;
-
-function changeImage() {
-    // 이미지 변경 기능 구현
-}
-
-function updateSelectedCount() {
-    const selectedCount = document.querySelectorAll('.select-post:checked').length;
-    const totalCount = Math.min(comments.length - (currentPage - 1) * itemsPerPage, itemsPerPage);
-    document.getElementById('selected-count').textContent = `${selectedCount}/${totalCount} 선택됨`;
-}
-
-function updateCommentCount() {
-    const totalCount = comments.length;
-    document.getElementById('tarot-count').textContent = `내가 쓴 글: ${totalCount}`;
-}
-
-function toggleSelectAll() {
-    const selectAllCheckbox = document.getElementById('select-all-checkbox');
-    const postCheckboxes = document.querySelectorAll('.select-post');
-    postCheckboxes.forEach(checkbox => {
-        checkbox.checked = selectAllCheckbox.checked;
-    });
-    updateSelectedCount();
-}
-
-function toggleDeleteAllButton() {
-    updateSelectedCount();
-}
-
-function deleteSelectedPosts() {
-    if (confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
-        const postCheckboxes = document.querySelectorAll('.select-post:checked');
-        postCheckboxes.forEach(checkbox => {
-            const index = Array.from(checkbox.closest('tbody').children).indexOf(checkbox.closest('tr')) + (currentPage - 1) * itemsPerPage;
-            comments.splice(index, 1);
-        });
-        renderTable(currentPage);
-        updateSelectedCount();
-        updateCommentCount();
-    }
-}
-
-function editComment(index) {
-    editIndex = index;
-    const comment = comments[index];
-    document.getElementById('edit-topic').value = `주제 ${index + 1}`;
-    document.getElementById('edit-comment').value = comment.text;
-    document.getElementById('edit-modal').style.display = 'block';
-}
-
-function closeModal() {
-    document.getElementById('edit-modal').style.display = 'none';
-    editIndex = null;
-}
-
-function saveEdit(event) {
-    event.preventDefault();
-    const editedComment = document.getElementById('edit-comment').value;
-
-    if (editIndex !== null) {
-        comments[editIndex].text = editedComment;
-        renderTable(currentPage);
-        closeModal();
-        alert('해당 내용이 수정되었습니다.');
-    }
-}
-
-function confirmDelete(index) {
-    if (confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
-        comments.splice(index, 1);
-        renderTable(currentPage);
-        updateSelectedCount();
-        updateCommentCount();
-    }
-}
-
-function confirmDeleteInModal() {
-    if (confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n해당 댓글을 삭제하시겠습니까?")) {
-        comments.splice(editIndex, 1);
-        renderTable(currentPage);
-        closeModal();
-        updateSelectedCount();
-        updateCommentCount();
-    }
-}
-
-function addComment(commentText) {
-    if (commentText.trim() === '') {
-        alert('댓글을 입력하세요.');
-        return;
-    }
-
-    const currentDate = new Date().toISOString().split('T')[0]; // 현재 날짜 (YYYY-MM-DD 형식)
-    comments.push({ text: commentText, date: currentDate });
-    renderTable(currentPage);
-    updateSelectedCount();
-    updateCommentCount();
-}
-
-function renderTable(page) {
-    currentPage = page;
-    const start = (page - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    const tableBody = document.getElementById('comment-table-body');
-    tableBody.innerHTML = '';
-
-    comments.slice(start, end).forEach((comment, index) => {
-        const row = document.createElement('tr');
-        const globalIndex = index + start;
-        row.innerHTML = `
-            <td><input type="checkbox" class="select-post" onclick="toggleDeleteAllButton()"></td>
-            <td>주제 ${globalIndex + 1}</td>
-            <td>${comment.text}</td>
-            <td>
-                <span>${comment.date}</span>
-                <div class="dropdown">
-                    <button class="dropdown-button" onclick="toggleDropdown(this)">⋮</button>
-                    <div class="dropdown-content">
-                        <button class="edit-button" onclick="editComment(${globalIndex})">수정</button>
-                        <button class="delete-button" onclick="confirmDelete(${globalIndex})">삭제</button>
-                    </div>
-                </div>
-            </td>
-        `;
-        tableBody.appendChild(row);
-    });
-
-    renderPagination();
-    updateSelectedCount();
-    document.getElementById('select-all-checkbox').checked = false; // 페이지를 넘길 때 전체 선택 체크박스를 해제
-}
-
-function renderPagination() {
-    const pagination = document.getElementById('pagination');
-    pagination.innerHTML = '';
-    const totalPages = Math.ceil(comments.length / itemsPerPage);
-
-    for (let i = 1; i <= totalPages; i++) {
-        const button = document.createElement('button');
-        button.textContent = i;
-        button.className = i === currentPage ? 'active' : '';
-        button.onclick = () => renderTable(i);
-        pagination.appendChild(button);
-    }
-}
-
-function toggleDropdown(button) {
-    const dropdownContent = button.nextElementSibling;
-
-    if (activeDropdown && activeDropdown !== dropdownContent) {
-        activeDropdown.classList.remove('show');
-    }
-
-    dropdownContent.classList.toggle('show');
-    activeDropdown = dropdownContent.classList.contains('show') ? dropdownContent : null;
-}
-
-// 페이지 다른 곳을 클릭하면 드롭다운이 닫히도록 설정
-document.addEventListener('click', function(event) {
-    if (activeDropdown && !event.target.closest('.dropdown')) {
-        activeDropdown.classList.remove('show');
-        activeDropdown = null;
-    }
-});
-
-// 댓글 추가 예시 (다른 페이지에서 댓글을 작성했을 때 호출되는 함수)
-function newCommentFromAnotherPage(commentText) {
-    addComment(commentText);
-}
-
-// 초기 테이블 렌더링
 document.addEventListener('DOMContentLoaded', () => {
-    renderTable(currentPage);
+    let comments = [
+        { number: 1, topic: '예시 주제', content: '첫번째 댓글 예시', date: '2023-06-20' }
+    ]; // 초기 예시 댓글 하나
+    const commentsPerPage = 10; // 페이지당 댓글 수 (고정)
+    let currentPage = 1; // 현재 페이지
+
+    function displayComments(page) {
+        const commentSection = document.getElementById('comment-section');
+        commentSection.innerHTML = '';
+
+        const table = document.createElement('table');
+        table.className = 'comment-table';
+
+        const header = document.createElement('tr');
+        header.innerHTML = `
+            <th><input type="checkbox" id="select-all"></th>
+            <th>번호</th>
+            <th>투표주제</th>
+            <th>댓글내용</th>
+            <th>작성날짜</th>
+            <th>관리</th>
+        `;
+        table.appendChild(header);
+
+        const startIndex = (page - 1) * commentsPerPage;
+        const endIndex = Math.min(startIndex + commentsPerPage, comments.length);
+
+        if (comments.length === 0) {
+            const noCommentsRow = document.createElement('tr');
+            const noCommentsCell = document.createElement('td');
+            noCommentsCell.colSpan = 6; // 전체 열을 합침
+            noCommentsCell.id = 'no-comments';
+            noCommentsCell.textContent = '작성글이 없습니다.';
+            noCommentsRow.appendChild(noCommentsCell);
+            table.appendChild(noCommentsRow);
+        } else {
+            for (let i = startIndex; i < endIndex; i++) {
+                const comment = comments[i];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox" class="select-comment"></td>
+                    <td>${comments.length - i}</td>
+                    <td>${comment.topic || ''}</td>
+                    <td>${comment.content || ''}</td>
+                    <td>${comment.date || ''}</td>
+                    <td><button class="edit-button">수정</button></td>
+                `;
+                table.appendChild(row);
+            }
+        }
+
+        commentSection.appendChild(table);
+
+        renderPagination(comments.length, commentsPerPage, page);
+
+        // 전체 선택 체크박스 이벤트 추가
+        document.getElementById('select-all').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.select-comment');
+            for (let checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+            updateSelectedCount();
+            toggleSelectedCountDisplay();
+        });
+
+        // 개별 선택 체크박스 이벤트 추가
+        const checkboxes = document.querySelectorAll('.select-comment');
+        for (let checkbox of checkboxes) {
+            checkbox.addEventListener('change', function() {
+                if (!this.checked) {
+                    document.getElementById('select-all').checked = false;
+                } else {
+                    const allChecked = Array.from(checkboxes).every(chk => chk.checked);
+                    if (allChecked) {
+                        document.getElementById('select-all').checked = true;
+                    }
+                }
+                updateSelectedCount();
+                toggleSelectedCountDisplay();
+            });
+        }
+
+        // 수정 버튼 이벤트 추가 (삭제 기능을 수정 기능으로 대체)
+        const editButtons = document.querySelectorAll('.edit-button');
+        for (let editButton of editButtons) {
+            editButton.addEventListener('click', function() {
+                // 수정 기능을 여기에 추가하세요.
+                alert('수정 기능이 구현될 예정입니다.');
+            });
+        }
+
+        // 선택된 댓글 수 업데이트 함수
+        function updateSelectedCount() {
+            const selectedCount = document.querySelectorAll('.select-comment:checked').length;
+            document.getElementById('selected-count').textContent = `${selectedCount}/10 선택`; // 페이지당 댓글 수 고정
+        }
+
+        // 선택된 댓글 수 표시 여부 토글 함수
+        function toggleSelectedCountDisplay() {
+            const selectedCount = document.querySelectorAll('.select-comment:checked').length;
+            const selectedCountElement = document.getElementById('selected-count');
+            if (selectedCount > 0) {
+                selectedCountElement.style.display = 'inline';
+            } else {
+                selectedCountElement.style.display = 'none';
+            }
+        }
+
+        // 모달 제어
+        const modal = document.getElementById('deleteModal');
+        const confirmDeleteButton = document.getElementById('confirm-delete');
+        const cancelDeleteButton = document.getElementById('cancel-delete');
+
+        document.getElementById('delete-selected').addEventListener('click', function() {
+            const selectedCount = document.querySelectorAll('.select-comment:checked').length;
+            if (selectedCount > 0) {
+                modal.style.display = 'block';
+            }
+        });
+
+        cancelDeleteButton.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // 삭제 확인 버튼 이벤트 추가
+        confirmDeleteButton.addEventListener('click', function() {
+            const selectedComments = document.querySelectorAll('.select-comment:checked');
+            selectedComments.forEach(checkbox => {
+                const row = checkbox.closest('tr');
+                const index = Array.from(row.parentNode.children).indexOf(row) - 1 + startIndex; // index 조정
+                comments.splice(index, 1);
+            });
+            modal.style.display = 'none';
+            displayComments(currentPage);
+        });
+
+        updateSelectedCount();
+        toggleSelectedCountDisplay();
+    }
+
+    function renderPagination(totalComments, commentsPerPage, currentPage) {
+        const paginationContainer = document.getElementById('pagination');
+        paginationContainer.innerHTML = '';
+        const pageCount = Math.ceil(totalComments / commentsPerPage);
+
+        for (let i = 1; i <= pageCount; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.textContent = i;
+            pageButton.className = 'page-button';
+            if (i === currentPage) {
+                pageButton.classList.add('active');
+            }
+            pageButton.addEventListener('click', () => {
+                displayComments(i);
+            });
+            paginationContainer.appendChild(pageButton);
+        }
+    }
+
+    // 초기 댓글 로드
+    displayComments(currentPage);
+
+    // 항상 아이콘이 보이도록 설정
+    document.getElementById('delete-selected').style.display = 'inline-flex';
 });

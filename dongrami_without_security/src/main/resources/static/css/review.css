@@ -5,9 +5,17 @@ body {
     padding: 0;
 }
 
-/*네비게이션 부분*/
+/* 헤더와 푸터 사이의 빈 공간을 없애기 위해 추가 */
+header {
+    margin-bottom: 0; /* 하단 여백 제거 */
+}
 
-  .header-container {
+footer {
+    margin-top: 0; /* 상단 여백 제거 */
+}
+
+/* 네비게이션 부분 */
+.header-container {
     background-color: #7150bd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -15,9 +23,10 @@ body {
     padding: 10px 0;
     height: 100px; /* Fixed height */
     position: relative; /* Add relative positioning */
-  }
-  
-  .logo-container {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+.logo-container {
     position: relative;
     display: inline-block;
     margin-left: auto;
@@ -26,18 +35,20 @@ body {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-  }
-  
-  .logo-text {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+.logo-text {
     color: #ffffff;
     font-weight: 700;
     text-decoration: none;
     font-size: 30px; /* 고정된 텍스트 크기 */
     transition: opacity 0.3s ease-in-out;
     display: inline-block;
-  }
-  
-  .hover-content {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+.hover-content {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -49,24 +60,28 @@ body {
     transform: translate(-50%, -50%);
     pointer-events: none;
     white-space: nowrap;
-  }
-  
-  .logo-text:hover {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+.logo-text:hover {
     opacity: 0;
-  }
-  
-  .logo-text:hover + .hover-content {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+.logo-text:hover + .hover-content {
     opacity: 1;
-  }
-  
-  .hover-text {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+.hover-text {
     color: #ffffff;
     font-weight: 700;
     font-size: 30px;
     margin: 0;
-  }
-  
-  .logo-image {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+.logo-image {
     width: 50px;
     height: 50px;
     background: url("/images/mainlogo.png") no-repeat center
@@ -74,18 +89,20 @@ body {
     background-size: contain;
     animation: spin 2s infinite linear;
     margin: 0;
-  }
-  
-  @keyframes spin {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+@keyframes spin {
     from {
       transform: rotate(0deg);
     }
     to {
       transform: rotate(360deg);
     }
-  }
-  
-  #right-section {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#right-section {
     display: flex;
     align-items: center;
     position: absolute;
@@ -93,22 +110,25 @@ body {
     top: 50%;
     transform: translateY(-50%);
     padding-right: 50px; /* Optional padding for spacing */
-  }
-  
-  #right-section a {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#right-section a {
     color: white;
     text-decoration: none;
     font-size: 15px; /* Fixed font size */
     margin-left: 20px;
     font-weight: bold;
-  }
-  
-  #right-section a:hover {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#right-section a:hover {
     text-decoration: none; /* Remove default underline */
     box-shadow: 0 2px 0 white; /* Create a "fake" underline with a shadow */
-  }
-  
-  #verticalLine {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#verticalLine {
     position: absolute;
     top: 50%;
     left: 46%;
@@ -116,34 +136,38 @@ body {
     width: 1px;
     height: 80%;
     background-color: white; /* 원하는 색상으로 변경 가능 */
-  }
-  
-  /* Navigation section styling */
-  #nav-section {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav-section {
     background: white;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #ccc;
-  }
-  
-  #center-section {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#center-section {
     width: 100%;
     text-align: center;
     padding: 10px; /* Add padding for spacing */
-  }
-  
-  #nav ul {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul {
     list-style-type: none;
     display: flex;
     justify-content: center;
-  }
-  
-  #nav ul li {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li {
     position: relative;
     margin: 0 50px;
-  }
-  
-  #nav ul li a {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li a {
     color: #888;
     text-decoration: none;
     font-size: 16px;
@@ -152,9 +176,10 @@ body {
     transition: color 0.3s;
     position: relative; /* 추가: 상대 위치 지정 */
     white-space: nowrap; /* Prevent text from wrapping */
-  }
-  
-  #nav ul li a:hover::after {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li a:hover::after {
     content: "";
     position: absolute;
     left: 50%; /* 선을 가운데로 맞추기 위해 왼쪽 위치를 50%로 설정 */
@@ -163,9 +188,10 @@ body {
     height: 5px; /* 밑줄 두께 조정 */
     background-color: #936fb0; /* 원하는 밑줄 색상 */
     transform: translateX(-50%); /* 가운데 정렬을 위해 이동 */
-  }
-  
-  #nav ul li ul {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li ul {
     background-color: #38356a;
     padding: 10px 0;
     border-radius: 5px;
@@ -176,79 +202,34 @@ body {
     transform: translateX(-50%);
     z-index: 100;
     display: none;
-  }
-  
-  #nav ul li:hover ul {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li:hover ul {
     display: block;
-  }
-  
-  #nav ul li ul li {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li ul li {
     width: 100%;
-  }
-  
-  #nav ul li ul li a {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li ul li a {
     display: block;
     color: #fff;
     text-decoration: none;
     padding: 8px 20px;
     font-size: 14px;
     transition: background-color 0.3s;
-  }
-  
-  #nav ul li ul li a:hover {
+}
+
+/* 나머지 스타일은 기존 CSS 유지 */
+#nav ul li ul li a:hover {
     background-color: rgba(255, 255, 255, 0.1);
-  }
+}
 
-  @media (max-width: 768px) {
-    .header-container {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .logo-container {
-      margin-bottom: 10px;
-    }
-  
-    #right-section {
-      margin-top: 10px;
-      text-align: center;
-    }
-  
-    #nav-section {
-      padding: 15px 0;
-      margin-top: 0; /* Adjust margin for smaller screens */
-    }
-  
-    #center-section {
-      display: none;
-    }
-  
-    #nav ul {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    #nav ul li {
-      margin: 5px 0;
-    }
-  
-    #nav ul li ul {
-      top: 0;
-      left: 100%;
-      transform: translateY(-50%);
-    }
-  
-    #nav ul li:hover ul {
-      display: none;
-    }
-  
-    #nav ul li ul li {
-      width: auto;
-    }
-  }
-    
-/*리뷰 부분*/
-
+/* 리뷰 부분 */
 .review-summary {
     background-color: #fff;
     padding: 20px;
@@ -291,17 +272,22 @@ body {
     display: flex;
     align-items: center;
     margin-right: 20px; /* 평균 평점과 가운데 선 사이의 간격 추가 */
+    line-height: 1; /* 수평 맞춤을 위해 line-height 추가 */
 }
 
 .rating-score .fixed-star {
     font-size: 32px;
     color: #f39c12;
     margin-right: 5px; /* 별과 숫자 평점 사이의 간격 */
+    line-height: 1; /* 수평 맞춤을 위해 line-height 추가 */
+    vertical-align: middle; /* 별을 숫자와 수평으로 맞춤 */
 }
 
 .rating-score .rating-value {
     font-size: 32px;
     font-weight: bold;
+    line-height: 1; /* 수평 맞춤을 위해 line-height 추가 */
+    vertical-align: middle; /* 숫자를 별과 수평으로 맞춤 */
 }
 
 .rating-details {
@@ -318,6 +304,8 @@ body {
 .stars .star {
     font-size: 32px;
     color: #ddd; /* 기본 색상 */
+    line-height: 1; /* 수평 맞춤을 위해 line-height 추가 */
+    vertical-align: middle; /* 별을 수평으로 맞춤 */
 }
 
 .stars .star.filled {
@@ -432,13 +420,32 @@ body {
 
 .review-text {
     font-size: 14px;
-    
 }
 
-.nickname {
+.nickname-container {
+    display: flex;
+    align-items: center;
     position: absolute;
     right: 10px;
     bottom: 10px;
+}
+
+.edit-button {
+    background-color: #ddd;
+    border: none;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px; /* 닉네임과 간격 추가 */
+}
+
+.edit-button:hover {
+    background-color: #ff7f00;
+}
+
+.nickname {
     font-size: 12px;
     color: #555;
 }
@@ -473,10 +480,8 @@ body {
     border-color: #f39c12;
 }
 
-
-/*푸터*/
-
-  footer {
+/* 푸터 */
+footer {
     background-color: #7150bd;
     color: white;
     padding: 20px 0;
@@ -484,10 +489,9 @@ body {
     position: relative;
     bottom: 0;
     width: 100%;
-    top: 1400px;
-  }
-  
-  .footer-wrapper {
+}
+
+.footer-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -496,43 +500,42 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-  }
-  
-  .footer-company {
+}
+
+.footer-company {
     margin-bottom: 20px;
-  }
-  
-  .footer-label {
+}
+
+.footer-label {
     font-size: 40px;
     font-weight: bold;
+}
 
-  }
-  
-  .footer-companyinfo {
+.footer-companyinfo {
     font-size: 14px;
     line-height: 1.5;
     margin-top: 20px;
-  }
-  
-  .footer-companyinfo p {
+}
+
+.footer-companyinfo p {
     margin: 5px 0;
-  }
-  
-  .copyright {
+}
+
+.copyright {
     font-size: 12px;
     margin-top: 10px;
-  }
-  
-  .footer-user {
+}
+
+.footer-user {
     margin-top: 20px;
-  }
-  
-  @media (max-width: 1200px) {
+}
+
+@media (max-width: 1200px) {
     footer {
       top: 1600px; /* 기존에 설정된 top 속성 제거 */
       bottom: 0; /* 화면 하단에 고정 */
     }
-  
+
     .footer-wrapper {
       padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
     }
@@ -548,5 +551,148 @@ body {
     .copyright {
       font-size: 10px; /* 폰트 크기를 더 작게 설정 */
     }
-  }
+}
 
+/* 모달창 CSS */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.review-details {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.review-user {
+    display: flex;
+    align-items: center;
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    text-align: left;
+}
+
+.user-name {
+    font-weight: bold;
+    display: block;
+}
+
+.user-role {
+    color: #888;
+}
+
+.review-rating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.review-rating label {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+}
+
+.rating-score {
+    font-size: 18px;
+    color: #000000;
+    margin-left: 10px;
+}
+
+#rating {
+    display: flex;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.star {
+    font-size: 24px;
+    color: #ddd;
+}
+
+.star.selected {
+    color: #f39c12;
+}
+
+#review-text {
+    width: 90%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    resize: none;
+}
+
+#character-count {
+    text-align: right;
+    color: #888;
+    font-size: 14px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.modal-buttons button {
+    background-color: #f39c12;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-buttons button:hover {
+    background-color: #e67e22;
+}
