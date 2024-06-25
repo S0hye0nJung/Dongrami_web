@@ -40,5 +40,9 @@ public class PageController {
         return "votepage";
     }
     
+    @GetMapping("/myreview")
+    public String myReview() {
+    	return "myreview";
+    }
     
 }

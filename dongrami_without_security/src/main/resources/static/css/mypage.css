@@ -254,20 +254,30 @@ body {
   border: 1px solid #ccc;
   padding: 20px;
   width: 600px;
-  height: 300px;
+  height: 320px;
   text-align: center;
   position: relative;
-  top: 100px;
+  top: 50px;
   left: 650px;
+  border-radius: 100px;
 }
 
 .profile-photo {
+  border-radius: 100px;
   width: 200px;
   height: 200px;
-  border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
+
+@media (max-width: 1200px) {
+    .profile-box {
+      left: 20px; /* 좌측으로 이동 */
+      width: 60%; /* 폭 조정 */
+      margin: 0 auto; /* 가운데 정렬 */
+    }
+  }
+
 
 .username {
   color: #333;
@@ -289,8 +299,8 @@ body {
   display: block;
   text-decoration: none;
   color: #999;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-right: 150px;
+  margin-bottom: 45px;
 }
 
 .edit-link img {
@@ -303,23 +313,107 @@ body {
   flex-direction: column; /* Align items vertically */
   justify-content: center; /* Center items horizontally */
   align-items: center; /* Center items vertically */
-  margin-top: 150px; /* Add margin between profile-box and menu */
-  margin-left: 650px;
+  margin-top: 100px; /* Add margin between profile-box and menu */
+  margin-left: 640px;
 }
 
+@media (max-width: 1200px) {
+    .menu {
+      margin-left: 190px;
+    }
+  }
+
 .menu > div {
-  width: 600px; /* Full width of parent container */
-  margin: 20px 0; /* Vertical margin between menu items */
+  width: 500px; /* Full width of parent container */
+  margin: 40px 0; /* Vertical margin between menu items */
+  margin-left: 60px;
 }
 
 .menu > div a {
-  display: block;
-  padding: 10px 20px;
-  background-color: #7150BD;
-  border: 1px solid #ccc;
-  border-radius: 10px; /* Rounded corners */
-  text-decoration: none;
-  color: white;
-  text-align: center;
-  width: 100%; /* Full width of parent container */
+    display: flex; /* Use flexbox layout */
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    padding: 10px 20px;
+    background-color: #7150BD;
+    border: 1px solid #ccc;
+    border-radius: 10px; /* Rounded corners */
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    width: 100%; /* Full width of parent container */
+    height: 60px;
 }
+
+footer {
+    background-color: #7150bd;
+    color: white;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    top: 150px;
+  }
+  
+  .footer-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .footer-company {
+    margin-bottom: 20px;
+  }
+  
+  .footer-label {
+    font-size: 40px;
+    font-weight: bold;
+
+  }
+  
+  .footer-companyinfo {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 20px;
+  }
+  
+  .footer-companyinfo p {
+    margin: 5px 0;
+  }
+  
+  .copyright {
+    font-size: 12px;
+    margin-top: 10px;
+  }
+  
+  .footer-user {
+    margin-top: 20px;
+  }
+  
+  @media (max-width: 1200px) {
+    footer {
+      top: 150px; /* 기존에 설정된 top 속성 제거 */
+      bottom: 0; /* 화면 하단에 고정 */
+    }
+  
+    .footer-wrapper {
+      padding: 10px; /* 내용을 좀 더 촘촘히 배치하기 위해 패딩 축소 */
+    }
+    
+    .footer-label {
+      font-size: 50px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .footer-companyinfo {
+      font-size: 12px; /* 폰트 크기를 더 작게 설정 */
+    }
+    
+    .copyright {
+      font-size: 10px; /* 폰트 크기를 더 작게 설정 */
+    }
+  }
