@@ -7,14 +7,14 @@
 -->
 <html>
 	<head>
-
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<title>동그라미</title>
+		<link rel="stylesheet" th:href="@{/css/index.css}" />
 		<link rel="stylesheet" th:href="@{/css/nav_footer.css}" />
-		<link rel="stylesheet" media="screen" th:href="@{/css/vote3.css}">
-		<link rel="stylesheet" th:href="@{/css/vote4.css}">
-		<link rel="stylesheet" th:href="@{/css/vote5.css}">
+		<link rel="stylesheet" media="screen" th:href="@{/css/votelist.css}">
+
 	</head>
 	<body>
 
@@ -60,168 +60,60 @@
 		    </nav>
 		  </div>
 		</section>
-	<!--<body class="no-sidebar is-preload">
-		<div id="page-wrapper">
 
-			<div id="page-wrapper">
+		    <section id="content-section">
+		      <div class="banner">
+		        <div class="inner-container">
+		          <div class="card-container">
+		            <div class="tarot-card" style="transform: rotate(-60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드1" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(-40deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드2" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(-20deg)">
+		              <img src="images/부엉이카드.jpg" alt="카드3" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(0deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드4" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(20deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드5" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(40deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드6" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드7" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드8" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드9" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드10" />
+		            </div>
+		            <div class="tarot-card" style="transform: rotate(60deg)">
+		              <img src="/images/부엉이카드.jpg" alt="카드11" />
+		            </div>
+		          </div>
+		          <div class="content-text">
+		            <h1>동그라미 타로</h1>
+		            <p>
+		              당신의 운명을 밝혀줄💡 타로 카드와 함께,
+		            </p>
+		            <p>
+		              당신의 여정을 시작하세요.
+		            </p>
+		          </div>
+		        </div>
+		      </div>
+							 <div id="vote-list"></div>
+								   <div id="pagination"></div>
+		
 
-				<section id="header" class="wrapper">-->
-					<!-- Logo -->
-					
-					<!--<div id="logo">
-					
-						<h1><a href="index.html">동그라미 타로</a></h1>
-						<p>당신의 운명을 밝혀줄 타로 카드와 함께, 당신의 여정을 시작하세요.</p>
-					</div>-->
-					<!-- Nav -->
-					<!--<nav id="nav">
-					<a href="index.html" style="float: right; margin-left: 10px;"><img src="images/mainimg.png" alt=""></a>
-						<ul>
-							<li class="current"><a href="index.html">Home</a></li>
-							<li>
-								<a href="#">연애</a>
-								<ul>
-									<li><a href="#">짝사랑</a></li>
-									<li><a href="#">연인</a></li>
-									<li><a href="#">재회</a></li>
-									<li><a href="#">미래 연인</a></li>
-									<li><a href="#">결혼</a></li>
-								</ul>
-							</li>
-							<li><a href="no-sidebar.html">금전</a></li>
-							<li>
-								<a href="#">직업</a>
-								<ul>
-									<li><a href="#">합격운</a></li>
-									<li><a href="#">일 잘풀릴까?</a></li>
-									<li><a href="#">직업추천</a></li>
-								</ul>
-							</li>   
-							<li><a href="no-sidebar.html">대인관계</a></li>
-							<li><a href="no-sidebar.html">MBTI</a></li>
-						</ul>
-					</nav>
-				</section>-->
-				
-
-
-				<!-- Main -->
-					<section id="vote">	
-						<div class = "block" id="block1">
-							<img th:src="@{/images/1567.jpg}" alt="Option 1 Image" class="option-image" id="image1">
-							<div class="bar-container" id="barContainer1">
-								<span id="title"> 투표 1 </span>
-								<span id="intro1">A??</span>
-								<div class="bar" id="bar1"></div>
-								<span class="text-left" id="text1">A</span>
-								<span class="percentage" id="percentage1"></span>
-							</div>
-							<div class="vote-button-container">
-								<button id="voteButton1" class="vote-button" onclick="vote(1)">투표</button>
-							</div>
-													
-							<div class="bar-container" id="barContainer2">
-								<span id="intro2">B??</span>
-								<div class="bar" id="bar2"></div>
-								<span class="text-left" id="text2">B</span>
-								<span class="percentage" id="percentage2"></span>
-							</div>
-							<div class="vote-button-container">
-								<button id="voteButton2" class="vote-button" onclick="vote(2)">투표</button>
-							</div>
-							 <button id="toggleButton1" onclick="toggleComment('comment-container1','toggleButton1')">댓글 달기</button>
-							 <button id="replyButton1" class="reply-button">반응 보기</button>
-							<div id="comment-container1" class="comment-container">
-								<div class="comment-form">
-									<textarea id="comment-input1" rows="4" placeholder="댓글을 입력하세요..."></textarea>
-									<button id = "submit1"onclick="addComment('comment-input1', 'comment-list1')">댓글 쓰기</button>
-								</div>
-								<div id="comment-list1" class="comment-list">
-									<!-- Comments will be appended here -->
-								</div>
-								<div class="pagination" id="pagination1">
-									<!-- Pagination buttons will be appended here -->
-								</div>
-							</div>
-						</div>
-					</section>
-
-					
-					
-					<section id="vote2">
-						<div class = "block" id="block2">
-							<img th:src="@{/images/zz.jpg}" alt="Option 2 Image" class="option-image" id="image2">
-							<div class="bar-container" id="barContainer3">
-								<span id="title"> 투표 2 </span>
-								<span id="intro1">A??</span>
-								<div class="bar" id="bar3"></div>
-								<span class="text-left" id="text3">A</span>
-								<span class="percentage" id="percentage3"></span>
-							</div>
-							<div class="vote-button-container">
-								<button id="voteButton3" class="vote-button" onclick="vote(3)">투표</button>
-							</div>
-							<div class="bar-container" id="barContainer4">
-								<span id="intro2">B??</span>
-								<div class="bar" id="bar4"></div>
-								<span class="text-left" id="text4">B</span>
-								<span class="percentage" id="percentage4"></span>
-							</div>
-							<div class="vote-button-container">
-								<button id="voteButton4" class="vote-button" onclick="vote(4)">투표</button>
-							</div>
-							<button id="toggleButton2" onclick="toggleComment('comment-container2','toggleButton2')">댓글 달기</button>
-							<button id="replyButton2" class="reply-button">반응 보기</button>
-							<div id="comment-container2" class="comment-container">
-								<div class="comment-form">
-									<textarea id="comment-input2" rows="4" placeholder="댓글을 입력하세요..."></textarea>
-									<button id="submit1" onclick="addComment('comment-input2', 'comment-list2')">등록</button>
-								</div>
-								<div id="comment-list2" class="comment-list">
-									<!-- Comments will be appended here -->
-								</div>
-								<div class="pagination" id="pagination2">
-									<!-- Pagination buttons will be appended here -->
-								</div>
-						</div>
-					</section>
-					<section id="vote3">
-						<div class = "block" id="block3">
-							<img th:src="@{/images/zz1.jpg}" alt="Option 2 Image" class="option-image" id="image3">
-							<div class="bar-container" id="barContainer5">
-								<span id="title"> 투표 3 </span>
-								<span id="intro1">A??</span>
-								<div class="bar" id="bar5"></div>
-								<span class="text-left" id="text5">A</span>
-								<span class="percentage" id="percentage5"></span>
-							</div>
-							<div class="vote-button-container">
-								<button id="voteButton5" class="vote-button" onclick="vote(5)">투표</button>
-							</div>
-							<div class="bar-container" id="barContainer6">
-								<span id="intro2">B??</span>
-								<div class="bar" id="bar6"></div>
-								<span class="text-left" id="text6">B</span>
-								<span class="percentage" id="percentage6"></span>
-							</div>
-							<div class="vote-button-container">
-								<button id="voteButton6" class="vote-button" onclick="vote(6)">투표</button>
-							</div>
-							<button id="toggleButton3" onclick="toggleComment('comment-container3','toggleButton3')">댓글 달기</button>
-							<button id="replyButton3" class="reply-button">반응 보기</button>
-							<div id="comment-container3" class="comment-container">
-								<div class="comment-form">
-									<textarea id="comment-input3" rows="4" placeholder="댓글을 입력하세요..."></textarea>
-									<button id="submit1" onclick="addComment('comment-input3', 'comment-list3')">등록</button>
-								</div>
-								<div id="comment-list3" class="comment-list">
-									<!-- Comments will be appended here -->
-								</div>
-								<div class="pagination" id="pagination3">
-									<!-- Pagination buttons will be appended here -->
-								</div>
-						</div>
-					</section>
 					
 					
 					<footer>
@@ -241,12 +133,10 @@
 
 					<!-- Scripts -->
 						<script th:src="@{/js/jquery.min.js}"></script>
-						<script th:src="@{/js/jquery.dropotron.min.js}"></script>
 						<script th:src="@{/js/browser.min.js}"></script>
 						<script th:src="@{/js/breakpoints.min.js}"></script>
 						<script th:src="@{/js/util.js}"></script>
-						<script th:src="@{/js/main.js}"></script>
-						<script th:src="@{/js/vote2.js}"></script>
+						<script th:src="@{/js/votelist.js}"></script>
 
 
 	</body>
