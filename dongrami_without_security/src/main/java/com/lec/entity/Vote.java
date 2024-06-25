@@ -32,10 +32,10 @@ public class Vote {
     private String option2;
 
     @Column(name = "option1_count")
-    private int option1Count;
+    private Integer option1Count;
 
     @Column(name = "option2_count")
-    private int option2Count;
+    private Integer option2Count;
 
     @Column(name = "vote_create")
     private Date voteCreate;
