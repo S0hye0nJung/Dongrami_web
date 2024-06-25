@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 클릭 수를 증가시키는 이벤트 리스너
     links.forEach(link => {
         link.addEventListener('click', (event) => {
-            event.preventDefault(); // 링크의 기본 동작 방지
+            //event.preventDefault(); // 링크의 기본 동작 방지
             const id = link.getAttribute('id');
 
             let clickCount = parseInt(link.dataset.clickCount) + 1; // 클릭 수 1 증가
