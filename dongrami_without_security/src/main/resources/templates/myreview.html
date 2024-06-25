@@ -75,27 +75,14 @@
 	<!-- 모달 창 추가 -->
 	<div id="deleteModal" class="modal">
 	    <div class="modal-content">
-	        <span class="close">&times;</span>
-	        <p>선택된 리뷰를 삭제하시겠습니까?</p>
-	        <button id="confirm-delete">삭제</button>
-	        <button id="cancel-delete">취소</button>
-	    </div>
-	</div>
-	
-	<!-- 수정 모달 -->
-	<div id="editModal" class="modal">
-	    <div class="modal-content">
-	        <span class="close">&times;</span>
-	        <h2>리뷰 수정</h2>
-	        <form id="edit-form">
-	            <label for="edit-review-text">리뷰 내용:</label>
-	            <textarea id="edit-review-text" name="reviewText" rows="4" required></textarea>
-	            <label for="edit-rating">평점:</label>
-	            <input type="number" id="edit-rating" name="rating" min="1" max="5" required>
-	            <input type="hidden" id="edit-review-id" name="reviewId">
-	            <button type="submit">저장</button>
-	            <button type="button" id="cancel-edit">취소</button>
-	        </form>
+	        <div class="modal-body">
+	            <img src="images/warning-icon.png" alt="warning icon" class="warning-icon">
+	            <p>정말 삭제하시겠습니까?</p>
+	        </div>
+	        <div class="modal-footer">
+	            <button id="confirm-delete" class="confirm-button">Yes</button>
+	            <button id="cancel-delete" class="cancel-button">Cancel</button>
+	        </div>
 	    </div>
 	</div>
 
