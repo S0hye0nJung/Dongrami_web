@@ -1,90 +1,111 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>프로필 및 활동</title>
-    <link rel="stylesheet" th:href="@{/css/comments.css}">
-    <link rel="stylesheet" th:href="@{/css/custom.css}">
+    <title>내댓글 페이지</title>
+    <link rel="stylesheet" href="css/comments.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="profile-header">
-            <div class="profile-image-container">
-                <img id="profile-image" class="profile-image" src="assets/images/basic.png" alt="프로필 이미지" onclick="changeImage()">
-                <img id="camera-icon" class="camera-icon" src="assets/images/cameraicon.png" alt="카메라 아이콘" onclick="changeImage()">
+<header>
+    <div class="header-container">
+        <div class="logo-container">
+            <a href="/" class="logo-text">CIRCLE TAROT</a>
+            <div class="hover-content">
+                <span class="hover-text left-text">동그</span>
+                <div class="logo-image"></div>
+                <span class="hover-text right-text">라미</span>
             </div>
-            <div class="profile-info">
-                <h2 id="nickname"></h2>
-                <div class="stats">
-                    <div id="tarot-count">내가 쓴 글: 1</div>
+        </div>
+        <div id="right-section">
+            <a href="/login" id="loginButton">로그인 / 회원가입</a>
+            <div id="userDropdownContainer" style="display: none">
+                <a href="#" id="userName" class="dropdown-toggle"></a>
+                <div id="userDropdown" class="dropdown-menu">
+                    <a href="/mypage">마이페이지</a>
+                    <a href="#" id="logoutButton">로그아웃</a>
                 </div>
             </div>
         </div>
-
-        <div class="table-actions header-row">
-            <button id="delete-all" onclick="deleteSelectedPosts()">
-                <img src="assets/images/deleteicon.png" alt="삭제" class="delete-icon">
-            </button>
-            <span id="selected-count">0/10 선택됨</span>
-        </div>
-
-        <table class="table">
-            <thead class="colored-header">
-                <tr>
-                    <th><input type="checkbox" id="select-all-checkbox" onclick="toggleSelectAll()"></th>
-                    <th>주제</th>
-                    <th>댓글내용</th>
-                    <th>등록일</th>
-                </tr>
-            </thead>
-            <tbody id="comment-table-body">
-                <tr>
-                    <td><input type="checkbox" class="select-post" onclick="toggleDeleteAllButton()"></td>
-                    <td>주제 1</td>
-                    <td>홍길동의 첫 번째 댓글 내용이 여기에 표시됩니다.</td>
-                    <td>
-                        <span>2023-06-01</span>
-                        <div class="dropdown">
-                            <button class="dropdown-button" onclick="toggleDropdown(this)">⋮</button>
-                            <div class="dropdown-content">
-                                <button class="edit-button" onclick="editComment(0)">수정</button>
-                                <button class="delete-button" onclick="confirmDelete(0)">삭제</button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="pagination" id="pagination">
-            <!-- 페이지 버튼이 여기에 동적으로 추가됩니다. -->
+    </div>
+</header>
+<section id="nav-section">
+    <div id="center-section">
+        <nav id="nav">
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/topic">타로 보러가기</a></li>
+                <li><a href="/vote">투표</a></li>
+                <li><a href="/review">후기</a></li>
+            </ul>
+        </nav>
+    </div>
+</section>
+<div class="container">
+    <h2>내가 쓴 댓글</h2>
+    <div id="comment-controls" class="comment-controls">
+        <button id="delete-selected" class="delete-button">
+            <img src="images/trash-icon.png" alt="trash icon" class="trash-icon">
+        </button>
+        <span id="selected-count">0/10 선택</span>
+    </div>
+    <div id="comment-section">
+        <!-- Comments will be dynamically inserted here -->
+    </div>
+    <div id="pagination" class="pagination"></div>
+</div>
+<footer>
+    <div class="footer-wrapper">
+        <div class="footer-company">
+            <label class="footer-label">CIRCLE TAROT</label>
+            <div class="description">
+                <div class="footer-companyinfo">
+                    <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+                </div>
+                <div class="copyright">
+                    <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+                </div>
+            </div>
         </div>
     </div>
+</footer>
 
-    <!-- 수정 모달 창 -->
-    <div id="edit-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+<!-- 댓글 수정 모달 -->
+<div id="comment-modal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
             <h2>댓글 수정</h2>
-            <form id="edit-form" onsubmit="saveEdit(event)">
-                <div class="form-group">
-                    <label for="edit-topic">주제</label>
-                    <input type="text" id="edit-topic" name="topic" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="edit-comment">댓글수정<span class="required">*</span></label>
-                    <textarea id="edit-comment" name="comment" required></textarea>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" onclick="confirmDeleteInModal()">삭제</button>
-                    <button type="submit">수정</button>
-                </div>
-            </form>
+            <span class="close">&times;</span>
+        </div>
+        <p id="modal-topic">댓글을 수정하세요:</p>
+        <form id="commentForm" method="post" action="/api/comments/update">
+            <textarea id="comment-text" name="commentText" placeholder="100자 미만 작성해주세요"></textarea>
+            <div id="character-count">0/100</div>
+            <input type="hidden" id="commentId" name="commentId" value="">
+            <div class="modal-buttons">
+                <button type="submit" id="save-comment">수정</button>
+                <button type="button" id="cancel-comment">취소</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 삭제 확인 모달 -->
+<div id="deleteModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>삭제 확인</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>선택한 댓글을 정말로 삭제하시겠습니까?</p>
+            <button id="confirm-delete" class="confirm-button">확인</button>
+            <button id="cancel-delete" class="cancel-button">취소</button>
         </div>
     </div>
+</div>
 
-	<script th:src="@{/js/comments.js}"></script>
-	<script th:src="@{/js/nickname.js}"></script>
+<script src="js/comments.js"></script>
 </body>
 </html>
