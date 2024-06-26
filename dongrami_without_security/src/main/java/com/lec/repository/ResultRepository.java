@@ -13,7 +13,7 @@ public interface ResultRepository extends JpaRepository<WebReading, Integer> {
 	
 	
 	 @Query(nativeQuery = true, value = """
-				            WITH RECURSIVE RandomReadings AS (
+				WITH RECURSIVE RandomReadings AS (
 			    (SELECT 
 			        'reading1' AS type,
 			        web_reading_id,
@@ -21,7 +21,7 @@ public interface ResultRepository extends JpaRepository<WebReading, Integer> {
 			        reading1_title AS title,
 			        card_id
 			    FROM web_reading
-			    WHERE subcategory_id = 1 AND reading1 IS NOT NULL AND LENGTH(TRIM(reading1)) > 0
+			    WHERE subcategory_id = :subcategoryId AND reading1 IS NOT NULL AND LENGTH(TRIM(reading1)) > 0
 			    ORDER BY RAND()
 			    LIMIT 1)
 			
@@ -34,7 +34,7 @@ public interface ResultRepository extends JpaRepository<WebReading, Integer> {
 			        reading2_title AS title,
 			        card_id
 			    FROM web_reading
-			    WHERE subcategory_id = 1 AND reading2 IS NOT NULL AND LENGTH(TRIM(reading2)) > 0
+			    WHERE subcategory_id = :subcategoryId AND reading2 IS NOT NULL AND LENGTH(TRIM(reading2)) > 0
 			    ORDER BY RAND()
 			    LIMIT 1)
 			
@@ -47,7 +47,7 @@ public interface ResultRepository extends JpaRepository<WebReading, Integer> {
 			        reading3_title AS title,
 			        card_id
 			    FROM web_reading
-			    WHERE subcategory_id = 1 AND reading3 IS NOT NULL AND LENGTH(TRIM(reading3)) > 0
+			    WHERE subcategory_id = :subcategoryId AND reading3 IS NOT NULL AND LENGTH(TRIM(reading3)) > 0
 			    ORDER BY RAND()
 			    LIMIT 1)
 			)
@@ -78,10 +78,10 @@ public interface ResultRepository extends JpaRepository<WebReading, Integer> {
             "w.reading1_title AS reading1Title, " +
             "w.subcategory_id AS subcategoryId, " +
             "w.card_id AS cardId, " +
-            "c.image_url	AS imageUrl1" +
-            "FROM web_reading w, cards c"+
+            "c.image_url  AS imageUrl1 " +
+            "FROM web_reading w, cards c "+
             "WHERE w.subcategory_id = :subcategoryId " +
-            "and w.card_id= c.card_id"+
+            "and w.card_id= c.card_id "+
             "ORDER BY RAND() " +
             "LIMIT 1", nativeQuery = true)
      List<Object[]> findOneCardReadings(@Param("subcategoryId") int subcategoryId);
