@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     let currentPage = 0;
     const pageSize = 3;
-
     function fetchVotes(page) {
         fetch(`/api/votes/paged-votes?page=${page}&size=${pageSize}`)
             .then(response => response.json())
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 data.content.forEach(vote => {
                     const voteDiv = createVoteElement(vote);
                     voteListDiv.appendChild(voteDiv);
-                    viewReplies(vote.voteId);
                 });
                 updatePaginationButtons(data);
             })
@@ -84,14 +82,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const replyContainer = document.createElement('div');
         replyContainer.classList.add('reply-container');
         const replyButton = document.createElement('button');
-        replyButton.id = 'replyButton';
-        replyButton.textContent = '반응 보기';
-        replyButton.addEventListener('click', function() {
-            viewReplies(vote.voteId);
-        });
-        replyContainer.appendChild(replyButton);
-        voteDiv.appendChild(replyContainer);
-
+			replyButton.id = 'replyButton';
+			replyButton.textContent = '반응 보기';
+			replyButton.addEventListener('click', function() {
+    		window.location.href = `/mainvote?id=${vote.voteId}`;
+		});
+		replyContainer.appendChild(replyButton);
+		voteDiv.appendChild(replyContainer);
+		
         return voteDiv;
         
     }
@@ -119,22 +117,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error voting:', error);
         });
     };
-function viewReplies(voteId) {
-    fetch(`/api/votes/replies?voteId=${voteId}`)
-        .then(response => response.json())
-        .then(data => {
-            const redirectUrl = data.redirectUrl;
-            if (redirectUrl) {
-                window.location.href = redirectUrl; // Redirect to the URL provided by server
-            } else {
-                console.error('No redirect URL found in server response');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching replies:', error);
-        });
-
-}
 
     function updateVoteResults(vote) {
         const totalVotes = vote.option1Count + vote.option2Count;
@@ -164,5 +146,6 @@ function viewReplies(voteId) {
         currentPage++;
         fetchVotes(currentPage);
     });
+    
     fetchVotes(currentPage); // 초기 로드
 });

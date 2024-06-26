@@ -95,13 +95,6 @@ public class VoteController {
         
         return "votes"; // 이 부분은 Thymeleaf 템플릿 이름에 해당
     }
-    @GetMapping("/replies")
-    public String getReplies(@RequestParam("voteId") int voteId, Model model) {
-        Optional<Vote> vote = voteService.getVoteById(voteId);
-        model.addAttribute("vote", vote);
-        // 필요한 추가 데이터를 모델에 추가
-        return "redirect: /mainvote";
-    }
 }
 
 
