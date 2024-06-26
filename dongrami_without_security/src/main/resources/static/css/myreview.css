@@ -224,7 +224,6 @@ h2 {
     width: 7%;
 }
 
-
 #pagination {
     display: flex;
     justify-content: center;
@@ -274,31 +273,14 @@ h2 {
 
 .delete-button {
     padding: 5px 10px;
-    background-color: #007bff; /* 배경색 변경 */
+    background-color: #ffffff;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
-    width: auto; /* 너비 자동 조정 */
-    height: auto; /* 높이 자동 조정 */
-    display: inline-flex; /* 항상 보이도록 설정 */
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 .delete-button:hover {
-    background-color: #0056b3; /* 호버 배경색 변경 */
-}
-
-.delete-button .trash-icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 5px;
-}
-
-.delete-button:focus {
-    outline: none; /* 포커스 시 테두리 제거 */
+    background-color: #d32f2f;
 }
 
 footer {
@@ -363,11 +345,11 @@ footer {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto;
+    margin: 5% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
-    max-width: 500px;
+    width: 400px; /* Fixed width for the modal */
+    text-align: center;
 }
 
 .modal-header {
@@ -377,7 +359,6 @@ footer {
 
 .close {
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
 }
@@ -387,18 +368,6 @@ footer {
     color: black;
     text-decoration: none;
     cursor: pointer;
-}
-
-.edit-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-
-.edit-button:hover {
-    background-color: #45a049;
 }
 
 .warning-icon {
