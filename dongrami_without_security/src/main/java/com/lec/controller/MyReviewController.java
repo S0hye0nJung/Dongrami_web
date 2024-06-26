@@ -8,13 +8,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lec.dto.MyReviewDTO;
 import com.lec.entity.Review;
 import com.lec.service.MyReviewService;
-import com.lec.service.ReviewService;
 
 @RestController
 @RequestMapping("/reviews")
@@ -37,5 +38,11 @@ public class MyReviewController {
     public ResponseEntity<Void> deleteReview(@PathVariable("reviewId") int reviewId) {
         myReviewService.deleteReview(reviewId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    @PutMapping("/{reviewId}")
+    public ResponseEntity<MyReviewDTO> updateReview(@PathVariable("reviewId") int reviewId, @RequestBody MyReviewDTO updatedReviewDTO) {
+        MyReviewDTO updatedReview = myReviewService.updateReview(reviewId, updatedReviewDTO);
+        return ResponseEntity.ok(updatedReview);
     }
 }
