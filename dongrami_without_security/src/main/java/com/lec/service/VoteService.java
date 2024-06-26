@@ -4,7 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import com.lec.entity.Vote;
 import com.lec.repository.VoteRepository;
 
@@ -37,5 +41,10 @@ public class VoteService {
     // 투표 삭제
     public void deleteVote(int id) {
         voteRepository.deleteById(id);
+    }
+    // 페이징
+    public Page<Vote> getPagedVotes(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return voteRepository.findAll(pageable);
     }
 }
