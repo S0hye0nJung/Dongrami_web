@@ -42,7 +42,9 @@ public class Vote {
 
     @Column(name = "vote_end")
     private Date voteEnd;
-
+    
+    
+    
     @Builder
 	public Vote(int voteId, String question, String voteImage, String option1, String option2, Integer option1Count,
 			Integer option2Count, Date voteCreate, Date voteEnd) {

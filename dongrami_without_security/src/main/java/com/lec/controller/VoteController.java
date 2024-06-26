@@ -6,12 +6,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import com.lec.entity.Vote;
-import com.lec.repository.VoteRepository;
 import com.lec.service.VoteService;
 
 @RestController
@@ -21,8 +21,6 @@ public class VoteController {
 	@Autowired
 	private VoteService voteService;
 
-	private VoteRepository voteRepository;
-
 	// 모든 투표 리스트 조회
 	@GetMapping
 	public List<Vote> getAllVotes() {
@@ -30,14 +28,16 @@ public class VoteController {
 	}
 
 	// 페이징
-	public Page<Vote> getVotes(@RequestParam int page, @RequestParam int size) {
-		return voteRepository.findAll(PageRequest.of(page, size));
-	}
+	  @GetMapping("/paged-votes")
+	    public Page<Vote> getPagedVotes(@RequestParam("page") int page, @RequestParam("size") int size) {
+	        return voteService.getPagedVotes(page, size);
+	    }
 
 	// 특정 ID의 투표 조회
 
-	  @GetMapping("/{id}") public ResponseEntity<Vote> getVoteById(@PathVariable
-	  int id) { Optional<Vote> vote = voteService.getVoteById(id); return
+	  @GetMapping("/{id}") 
+	  public ResponseEntity<Vote> getVoteById(@PathVariable int id) { 
+		  Optional<Vote> vote = voteService.getVoteById(id); return
 	  vote.map(ResponseEntity::ok).orElseGet(() ->
 	  ResponseEntity.notFound().build()); 
 	  }
@@ -82,6 +82,26 @@ public class VoteController {
 		voteService.deleteVote(id);
 		return ResponseEntity.noContent().build();
 	}
+
+    
+    
+    @GetMapping("/votes")
+    public String showVotesPage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,Model model) {
+        Page<Vote> votePage = voteService.getPagedVotes(page, size);
+        
+        model.addAttribute("votes", votePage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", votePage.getTotalPages());
+        
+        return "votes"; // 이 부분은 Thymeleaf 템플릿 이름에 해당
+    }
+    @GetMapping("/replies")
+    public String getReplies(@RequestParam("voteId") int voteId, Model model) {
+        Optional<Vote> vote = voteService.getVoteById(voteId);
+        model.addAttribute("vote", vote);
+        // 필요한 추가 데이터를 모델에 추가
+        return "redirect: /mainvote";
+    }
 }
 
 

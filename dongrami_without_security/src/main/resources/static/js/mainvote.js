@@ -1,34 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const voteListDiv = document.getElementById('vote-list');
-    const prevPageButton = document.getElementById('prevPage');
-    const nextPageButton = document.getElementById('nextPage');
-    const currentPageSpan = document.getElementById('currentPage');
-    
-    let currentPage = 0;
-    const pageSize = 3;
+    const voteDetailsDiv = document.getElementById('vote-list');
 
-    function fetchVotes(page) {
-        fetch(`/api/votes/paged-votes?page=${page}&size=${pageSize}`)
-            .then(response => response.json())
-            .then(data => {
-                voteListDiv.innerHTML = ''; // Clear existing votes
-                data.content.forEach(vote => {
-                    const voteDiv = createVoteElement(vote);
-                    voteListDiv.appendChild(voteDiv);
-                    viewReplies(vote.voteId);
-                });
-                updatePaginationButtons(data);
+    function fetchVoteById(id) {
+        fetch(`/api/votes/${id}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch vote');
+                }
+                return response.json();
             })
-            .catch(error => console.error('Error fetching votes:', error));
+            .then(vote => {
+                // 투표 정보를 사용하여 HTML을 동적으로 생성하여 voteDetailsDiv에 추가
+                const voteDiv = createVoteElement(vote);
+                voteListDiv.appendChild(voteDiv);
+            })
+            .catch(error => {
+                console.error('Error fetching vote:', error);
+            });
     }
 
-    function updatePaginationButtons(data) {
-        currentPageSpan.textContent = data.number + 1;
-        prevPageButton.disabled = data.first;
-        nextPageButton.disabled = data.last;
-    }
-
-    function createVoteElement(vote) {
+ function createVoteElement(vote) {
         const voteDiv = document.createElement('div');
         voteDiv.classList.add('vote-item');
 
@@ -94,9 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         return voteDiv;
         
-    }
-
-    window.voteOption = function(voteId, option) {
+       window.voteOption = function(voteId, option) {
         fetch(`/api/votes/${voteId}`, {
             method: 'PUT',
             headers: {
@@ -119,22 +108,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Error voting:', error);
         });
     };
-function viewReplies(voteId) {
-    fetch(`/api/votes/replies?voteId=${voteId}`)
-        .then(response => response.json())
-        .then(data => {
-            const redirectUrl = data.redirectUrl;
-            if (redirectUrl) {
-                window.location.href = redirectUrl; // Redirect to the URL provided by server
-            } else {
-                console.error('No redirect URL found in server response');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching replies:', error);
-        });
-
-}
 
     function updateVoteResults(vote) {
         const totalVotes = vote.option1Count + vote.option2Count;
@@ -153,16 +126,7 @@ function viewReplies(voteId) {
         bar2.style.width = `${percentage2}%`;
     }
 
-    prevPageButton.addEventListener('click', function() {
-        if (currentPage > 0) {
-            currentPage--;
-            fetchVotes(currentPage);
-        }
-    });
-
-    nextPageButton.addEventListener('click', function() {
-        currentPage++;
-        fetchVotes(currentPage);
-    });
-    fetchVotes(currentPage); // 초기 로드
+    // 예시: 투표 목록에서 특정 투표를 클릭했을 때 fetchVoteById 함수를 호출하는 예시
+    // 투표 목록에서 특정 요소를 클릭하는 방식에 따라 이벤트 핸들러를 추가
+    // 예를 들어, 특정 클래스를 가진 요소를 클릭했을 때 해당 요소의 데이터셋을 이용하여 id를 가져오는 방식 등을 사용할 수 있습니다.
 });
