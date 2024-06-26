@@ -8,5 +8,4 @@ import com.lec.entity.Vote;
 
 @Repository
 public interface VoteRepository extends JpaRepository<Vote, Integer> {
-	Page<Vote> findAll(Pageable pageable);
 }
