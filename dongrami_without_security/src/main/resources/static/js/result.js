@@ -89,4 +89,35 @@ $(document).ready(function() {
             }
         });
     });
+
+    // 추가된 코드 시작
+    const subcategoryName = "타로 소주제"; // 현재 페이지의 소주제 이름 (임의로 설정)
+    const currentUserNickname = '현재 사용자 닉네임'; // 실제 로그인된 사용자 닉네임으로 변경
+    $('.user-role').text('#' + subcategoryName); // 소주제 설정
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/reviews/submit',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify({
+            userId: userId,
+            subcategoryId: subcategoryId,
+            resultId: resultId,
+            rating: ratingScore,
+            reviewText: reviewText,
+            nickname: currentUserNickname,
+            subcategoryName: subcategoryName
+        }),
+        success: function(response) {
+            alert('리뷰가 성공적으로 제출되었습니다.');
+            $('#review-modal').css('display', 'none'); // 모달 창 닫기
+            fetchReviews(); // 리뷰 페이지의 fetchReviews 함수를 호출하여 업데이트
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log('에러 메시지:', textStatus, errorThrown);
+            alert('리뷰 제출에 실패했습니다. 다시 시도해주세요. \n' + textStatus + ': ' + errorThrown);
+        }
+    });
+    // 추가된 코드 끝
 });

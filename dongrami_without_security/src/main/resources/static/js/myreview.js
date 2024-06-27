@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/reviews')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('댓글을 가져오는 중 오류가 발생했습니다: ' + response.statusText);
+                    throw new Error('리뷰를 가져오는 중 오류가 발생했습니다: ' + response.statusText);
                 }
                 return response.json();
             })
@@ -27,18 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('/reviews/count')
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('댓글 갯수를 가져오는 중 오류가 발생했습니다: ' + response.statusText);
+                    throw new Error('리뷰 갯수를 가져오는 중 오류가 발생했습니다: ' + response.statusText);
                 }
                 return response.json();
             })
             .then(data => {
                 const totalCountElement = document.getElementById('total-count');
-                totalCountElement.textContent = `총 댓글: ${data.count}개`;
+                totalCountElement.textContent = `총 리뷰 갯수: ${data}개`; // 데이터에서 바로 값을 가져오기 때문에 data.count 대신 data를 사용
             })
             .catch(error => {
                 console.error(error);
                 const totalCountElement = document.getElementById('total-count');
-                totalCountElement.textContent = '총 댓글: 오류';
+                totalCountElement.textContent = '총 리뷰 갯수: 오류';
             });
     }
 
@@ -103,6 +103,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkboxes = document.querySelectorAll('.select-comment');
         for (let checkbox of checkboxes) {
             checkbox.addEventListener('change', function() {
+                const selectedCount = document.querySelectorAll('.select-comment:checked').length;
+                if (selectedCount > 10) {
+                    this.checked = false; // 체크박스 체크 막기
+                    return;
+                }
+                updateSelectedCount();
+
                 if (!this.checked) {
                     document.getElementById('select-all').checked = false;
                 } else {
@@ -111,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('select-all').checked = true;
                     }
                 }
-                updateSelectedCount();
                 toggleSelectedCountDisplay();
             });
         }
@@ -193,114 +199,102 @@ document.addEventListener('DOMContentLoaded', () => {
         return date.toLocaleDateString('ko-KR');
     }
 
-    function fillEditModal(reviewId, reviewText, rating) {
-        const editReviewTextElement = document.getElementById('edit-review-text');
-        const editReviewIdElement = document.getElementById('edit-review-id');
+function fillEditModal(reviewId, reviewText, rating) {
+    const editReviewTextElement = document.getElementById('edit-review-text');
+    const editReviewIdElement = document.getElementById('edit-review-id');
+    const editModal = document.getElementById('editModal');
 
-        if (editReviewTextElement && editReviewIdElement) {
-            editReviewTextElement.value = reviewText;
-            editReviewIdElement.value = reviewId;
-            updateStars(rating, '#edit-rating');
+    if (editReviewTextElement && editReviewIdElement && editModal) {
+        editReviewTextElement.value = reviewText;
+        editReviewIdElement.value = reviewId;
+        updateStars(rating, '#edit-rating');
+        document.getElementById('edit-rating-score').textContent = `${rating}점`;
+        document.getElementById('edit-rating-score-value').value = rating;
 
-            const editModal = document.getElementById('editModal');
-            if (editModal) {
-                editModal.style.display = 'block';
+        editModal.style.display = 'block';
 
-                const closeButtons = document.getElementsByClassName('close');
-                for (let closeButton of closeButtons) {
-                    closeButton.onclick = function() {
-                        closeModal('editModal');
-                    };
-                }
-
-                const cancelEditButton = document.getElementById('cancel-edit');
-                if (cancelEditButton) {
-                    cancelEditButton.onclick = function() {
-                        closeModal('editModal');
-                    };
-                }
-
-                const editForm = document.getElementById('edit-form');
-                if (editForm) {
-                    editForm.addEventListener('submit', function(event) {
-                        event.preventDefault();
-                        const updatedReview = {
-                            reviewId: parseInt(editReviewIdElement.value),
-                            reviewText: editReviewTextElement.value,
-                            rating: parseInt(document.getElementById('edit-rating-score-value').value)
-                        };
-
-                        updateReview(updatedReview);
-                    });
-                }
-
-                const stars = document.querySelectorAll('#edit-rating .star');
-                stars.forEach((star, index) => {
-                    star.addEventListener('click', () => {
-                        const rating = index + 1;
-                        updateStars(rating, '#edit-rating');
-                        document.getElementById('edit-rating-score-value').value = rating; // 수정된 부분
-                    });
-                });
-            }
-        } else {
-            console.error('Edit review modal elements not found');
-        }
-    }
-
-    function updateReview(review) {
-        fetch(`/reviews/${review.reviewId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(review),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('리뷰 업데이트에 실패했습니다: ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('리뷰가 성공적으로 업데이트되었습니다:', data);
-            fetchComments(); // 수정된 리뷰 목록을 다시 불러옴
-            closeModal('editModal'); // 수정 모달 닫기
-            // 수정 완료 메시지 표시
-            document.getElementById('edit-success-message').style.display = 'block';
-            setTimeout(() => {
-                document.getElementById('edit-success-message').style.display = 'none';
-            }, 3000); // 3초 후 메시지 숨기기
-        })
-        .catch(error => {
-            console.error('리뷰 업데이트에 실패했습니다:', error);
-        });
-    }
-
-    function updateStars(rating, container) {
-        const stars = document.querySelectorAll(`${container} .star`);
+        // 별점 클릭 이벤트 리스너 추가
+        const stars = editModal.querySelectorAll('#edit-rating .star');
         stars.forEach((star, index) => {
-            if (index < rating) {
-                star.classList.add('selected');
-            } else {
-                star.classList.remove('selected');
-            }
+            star.addEventListener('click', () => {
+                const newRating = index + 1;
+                updateStars(newRating, '#edit-rating');
+                document.getElementById('edit-rating-score').textContent = `${newRating}점`;
+                document.getElementById('edit-rating-score-value').value = newRating;
+
+                // 모든 별 초기화 (기본 회색)
+                stars.forEach((s, idx) => {
+                    s.classList.remove('checked');
+                });
+
+                // 클릭된 별까지 색상 변경
+                for (let i = 0; i <= index; i++) {
+                    stars[i].classList.add('checked');
+                }
+            });
         });
 
-        const ratingScoreElement = document.getElementById('edit-rating-score-value');
-        if (ratingScoreElement) {
-            ratingScoreElement.value = rating;
-        } else {
-            console.error('Rating score element not found');
+        // 닫기 및 취소 버튼 이벤트 리스너 추가
+        const closeButtons = editModal.getElementsByClassName('close');
+        for (let closeButton of closeButtons) {
+            closeButton.onclick = function() {
+                closeModal('editModal');
+            };
         }
 
-        const ratingScoreTextElement = document.getElementById('edit-rating-score');
-        if (ratingScoreTextElement) {
-            ratingScoreTextElement.textContent = rating.toString();
-        } else {
-            console.error('Rating score text element not found');
+        const cancelEditButton = document.getElementById('cancel-edit');
+        if (cancelEditButton) {
+            cancelEditButton.onclick = function() {
+                closeModal('editModal');
+            };
         }
+
+        // 수정 폼 제출 이벤트 리스너 추가
+        const editForm = document.getElementById('edit-form');
+        if (editForm) {
+            editForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const updatedReview = {
+                    reviewId: parseInt(editReviewIdElement.value),
+                    reviewText: editReviewTextElement.value,
+                    rating: parseInt(document.getElementById('edit-rating-score-value').value)
+                };
+
+                updateReview(updatedReview);
+            });
+        } else {
+            console.error('Edit review modal element not found');
+        }
+    } else {
+        console.error('Edit review modal elements not found');
     }
+}
+
+
+function updateReview(review) {
+    fetch(`/reviews/${review.reviewId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(review),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('리뷰 업데이트에 실패했습니다: ' + response.statusText);
+        }
+        return response.json(); // 이 부분이 누락되어 있었습니다
+    })
+    .then(data => {
+        console.log('리뷰가 성공적으로 업데이트되었습니다:', data);
+        closeModal('editModal');
+        fetchComments(); // 업데이트 후 댓글 목록 다시 불러오기
+    })
+    .catch(error => {
+        console.error('리뷰 업데이트 중 오류가 발생했습니다:', error);
+        closeModal('editModal');
+    });
+}
 
     function deleteReview(reviewId) {
         fetch(`/reviews/${reviewId}`, {
@@ -310,33 +304,49 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) {
                 throw new Error('리뷰 삭제에 실패했습니다: ' + response.statusText);
             }
-            console.log('리뷰가 성공적으로 삭제되었습니다.');
-            fetchComments(); // 삭제 후 리뷰 목록 다시 불러옴
+            console.log('리뷰가 성공적으로 삭제되었습니다');
+            fetchComments(); // 삭제 후 댓글 목록 다시 불러오기
         })
         .catch(error => {
-            console.error('리뷰 삭제에 실패했습니다:', error);
+            console.error('리뷰 삭제 중 오류가 발생했습니다:', error);
+        });
+    }
+
+    function updateStars(rating, containerSelector) {
+        const stars = document.querySelectorAll(`${containerSelector} .star`);
+        stars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.add('checked');
+            } else {
+                star.classList.remove('checked');
+            }
         });
     }
 
     function updateSelectedCount() {
         const selectedCount = document.querySelectorAll('.select-comment:checked').length;
-        const totalCount = Math.min(comments.length, 10); // 최대 선택 가능 항목 수는 10개로 제한
-        const selectedCountElement = document.getElementById('selected-count');
-        selectedCountElement.style.display = 'inline-block';
-        selectedCountElement.textContent = `${selectedCount}/${totalCount} 선택`;
+        document.getElementById('selected-count').textContent = `${selectedCount}/10 선택`;
     }
 
     function toggleSelectedCountDisplay() {
         const selectedCount = document.querySelectorAll('.select-comment:checked').length;
-        const totalCount = Math.min(comments.length, 10); // 최대 선택 가능 항목 수는 10개로 제한
-        const selectedCountElement = document.getElementById('selected-count');
-        if (selectedCount === 0) {
-            selectedCountElement.style.display = 'none';
+        const deleteSelectedButton = document.getElementById('delete-selected');
+        if (selectedCount > 0) {
+            deleteSelectedButton.style.display = 'inline-block';
         } else {
-            selectedCountElement.style.display = 'inline-block';
+            deleteSelectedButton.style.display = 'none';
         }
-        selectedCountElement.textContent = `${selectedCount}/${totalCount} 선택`;
     }
 
-    fetchComments(); // 페이지 로드 시 리뷰 목록을 가져옴
+    fetchComments(); // 페이지 로드 시 댓글 목록 불러오기
+});
+
+// 별점 클릭 이벤트 리스너 추가 (복사한 부분)
+const stars = document.querySelectorAll('#edit-rating .star');
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const rating = index + 1; // Rating is 1-indexed
+        updateStars(rating, '#edit-rating');
+        document.getElementById('edit-rating-score-value').value = rating;
+    });
 });

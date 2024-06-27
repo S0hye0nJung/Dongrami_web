@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lec.dto.MyReviewDTO;
 import com.lec.entity.Review;
+import com.lec.repository.MyReviewRepository;
 import com.lec.service.MyReviewService;
 
 @RestController
@@ -22,11 +23,14 @@ import com.lec.service.MyReviewService;
 public class MyReviewController {
 
     private final MyReviewService myReviewService;
+    private final MyReviewRepository myReviewRepository;
 
     @Autowired
-    public MyReviewController(MyReviewService myReviewService) {
+    public MyReviewController(MyReviewService myReviewService, MyReviewRepository myReviewRepository) {
         this.myReviewService = myReviewService;
+        this.myReviewRepository = myReviewRepository;
     }
+
 
     @GetMapping
     public ResponseEntity<List<MyReviewDTO>> getAllReviews() {
@@ -44,5 +48,12 @@ public class MyReviewController {
     public ResponseEntity<MyReviewDTO> updateReview(@PathVariable("reviewId") int reviewId, @RequestBody MyReviewDTO updatedReviewDTO) {
         MyReviewDTO updatedReview = myReviewService.updateReview(reviewId, updatedReviewDTO);
         return ResponseEntity.ok(updatedReview);
+    }
+    
+    
+    @GetMapping("/count")
+    public ResponseEntity<Long> getTotalReviewCount() {
+        long totalCount = myReviewRepository.count();
+        return ResponseEntity.ok(totalCount);
     }
 }

@@ -27,7 +27,7 @@ public class MyReviewServiceImpl implements MyReviewService {
 
     @Override
     public List<MyReviewDTO> getAllReviewDTOs() {
-        List<Review> reviews = myReviewRepository.findAll();
+        List<Review> reviews = myReviewRepository.findAllOrderByLatestDateDesc();
         return reviews.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
