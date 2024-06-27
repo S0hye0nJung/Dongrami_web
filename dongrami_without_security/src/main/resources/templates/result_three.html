@@ -49,36 +49,36 @@
 	     </div>
 	   </section>
 	   
-        <div class="content"  th:each="reading : ${webReadings}">
-            <div class="img">
-                <img src="./images/basic.png" alt="" id="cha">
-            </div>
-			<div class="cards">
-			        <div class="card" data-position="과거">
-						<img th:src="${reading.imageUrl1}" id="card1" />
-					</div>
-			        <div class="card" data-position="현재">
-						<img th:src="${reading.imageUrl2}" id="card2" />
-					</div>
-			        <div class="card" data-position="미래">
-						<img th:src="${reading.imageUrl3}" id="card3" />
-					</div>
-			    </div>
-			    <div class="interpretation">
-			        <div>
-			            <span class="title" th:text="${reading.reading1Title}">과거</span>
-			            <div class="icontent" id="past-content" th:text="${reading.reading1}">해석</div>
-			        </div>
-			        <div>
-			            <span class="title" th:text="${reading.reading2Title}">현재</span>
-			            <div class="icontent" id="present-content" th:text="${reading.reading2}">해석1</div>
-			        </div>
-			        <div>
-			            <span class="title" th:text="${reading.reading3Title}">미래</span>
-			            <div class="icontent" id="future-content" th:text="${reading.reading3}">해석2</div>
-			        </div>
-			    </div>
-            </div>
+	   <div class="content">
+	           <div class="img">
+	               <img src="./images/basic.png" alt="" id="cha">
+	           </div>
+	           <div class="cards">
+	               <div class="card" data-position="과거">
+	                   <img th:src="${reading.imageUrl1}" id="card1" />
+	               </div>
+	               <div class="card" data-position="현재">
+	                   <img th:src="${reading.imageUrl2}" id="card2" />
+	               </div>
+	               <div class="card" data-position="미래">
+	                   <img th:src="${reading.imageUrl3}" id="card3" />
+	               </div>
+	           </div>
+	           <div class="interpretation">
+	               <div style="white-space: pre-line;">
+	                   <span class="title" th:text="${reading.reading1Title}"></span>
+	                   <div class="icontent" id="past-content" th:text="${reading.reading1}"></div>
+	               </div>
+	               <div style="white-space: pre-line;">
+	                   <span class="title" th:text="${reading.reading2Title}"></span>
+	                   <div class="icontent" id="present-content" th:text="${reading.reading2}"></div>
+	               </div>
+	               <div style="white-space: pre-line;">
+	                   <span class="title" th:text="${reading.reading3Title}"></span>
+	                   <div class="icontent" id="future-content" th:text="${reading.reading3}"></div>
+	               </div>
+	           </div>
+	       </div>
             <div class="buttons">
                 <a href="javascript:void(0);" id="share">공유</a>
                 <a href="javascript:void(0);" id="save">저장</a>
@@ -120,18 +120,19 @@
             </div>
         </div>
 		<footer>
-		        <div class="footer-wrapper">
-		          <div class="footer-company">
-		            <label class="footer-label">CIRCLE TAROT</label>
-		            <div class="description">
-		              <div class="footer-companyinfo">
-		                <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
-		              </div>
-		              <div class="copyright">
-		                <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
-		              </div>
-		            </div>
-		      </footer>
+			       <div class="footer-wrapper">
+						<div class="footer-company">
+						    <label class="footer-label">CIRCLE TAROT</label>
+						        <div class="description">
+						            <div class="footer-companyinfo">
+						                <p>(주) 동그라미타로 | 대표: 동그라미 | 고객센터 02-1234-5678 | 주소: 서울시 서초구 사평대로52길 9-2 소망빌딩 3층 | 사업자번호: xxx-xx-xxxxx | 이메일: donggramitarot@naver.com</p>
+						            </div>
+						            <div class="copyright">
+						                <p>Copyright ⓒ 2024 by DongGramiTarot all rights reserved.</p>
+						            </div>
+						        </div>
+						</div>		
+				</footer>
         <!-- Scripts -->
         <script src="./js/result.js"></script>
     </div>

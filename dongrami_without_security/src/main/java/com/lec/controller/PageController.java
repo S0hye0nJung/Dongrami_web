@@ -48,4 +48,9 @@ public class PageController {
     	return "myreview";
     }
     
+    @GetMapping("/mytarotlist")
+    public String myTarotList() {
+    	return "mytarotlist";
+    }
+    
 }
