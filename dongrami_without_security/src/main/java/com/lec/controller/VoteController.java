@@ -21,9 +21,6 @@ public class VoteController {
 	@Autowired
 	private VoteService voteService;
 
-
-	private VoteRepository voteRepository;
-
 	// 모든 투표 리스트 조회
 	@GetMapping
 	public List<Vote> getAllVotes() {
