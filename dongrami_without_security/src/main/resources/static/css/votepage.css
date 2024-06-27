@@ -82,7 +82,6 @@ h1 {
     display: flex;
     width: 400px;
     height: 30px;
-    cursor: pointer;
     position: relative;
     border-radius: 5px;
     top: -500px;
@@ -95,7 +94,6 @@ h1 {
 	display: flex;
     width: 400px;
     height: 30px;
-    cursor: pointer;
     position: relative;
     border-radius: 5px;
     top: -500px;
