@@ -84,14 +84,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
         const replyContainer = document.createElement('div');
         replyContainer.classList.add('reply-container');
-        const replyButton = document.createElement('button');
-			replyButton.id = 'replyButton';
-			replyButton.textContent = '반응 보기';
-			replyButton.addEventListener('click', function() {
-    		window.location.href = `/mainvote?id=${vote.voteId}`;
-		});
-		replyContainer.appendChild(replyButton);
-		voteDiv.appendChild(replyContainer);
+        replyContainer.innerHTML = `
+            <button id="replyButton">반응 보기</button>
+        `;
+        voteDiv.appendChild(replyContainer);
+
+        const replyButton = replyContainer.querySelector('#replyButton');
+        replyButton.addEventListener('click', function() {
+            window.location.href = '/mainvote'; // 이동할 페이지 경로 설정
+        });
 
         return voteDiv;
     }

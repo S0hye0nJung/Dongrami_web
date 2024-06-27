@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.lec.entity.Vote;
-import com.lec.repository.VoteRepository;
 import com.lec.service.VoteService;
 
 @RestController
@@ -22,7 +21,6 @@ public class VoteController {
 	@Autowired
 	private VoteService voteService;
 
-	private VoteRepository voteRepository;
 	// 모든 투표 리스트 조회
 	@GetMapping
 	public List<Vote> getAllVotes() {
@@ -37,15 +35,12 @@ public class VoteController {
 
 	// 특정 ID의 투표 조회
 
-	  @GetMapping("/{id}")
-	    public ResponseEntity<Vote> getVoteById(@PathVariable("id") int id) {
-	        Optional<Vote> vote = voteService.getVoteById(id);
-	        if (vote.isPresent()) {
-	            return ResponseEntity.ok(vote.get());
-	        } else {
-	            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-	        }
-	    }
+	  @GetMapping("/{id}") 
+	  public ResponseEntity<Vote> getVoteById(@PathVariable int id) { 
+		  Optional<Vote> vote = voteService.getVoteById(id); return
+	  vote.map(ResponseEntity::ok).orElseGet(() ->
+	  ResponseEntity.notFound().build()); 
+	  }
 
 	// 투표 생성
 	@PostMapping

@@ -3,7 +3,6 @@ package com.lec.Impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +66,4 @@ public class MemberServiceImpl implements MemberService{
         }
         return sb.toString();
     }
-
-	@Override
-	public Optional<Member> getMemberById(String userId) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
-	}
 }

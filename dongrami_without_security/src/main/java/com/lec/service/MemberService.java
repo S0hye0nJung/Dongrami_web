@@ -2,11 +2,9 @@ package com.lec.service;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.Optional;
 import java.util.Random;
 
 import com.lec.dto.MemberDTO;
-import com.lec.entity.Member;
 
 public interface MemberService {
 	
@@ -14,6 +12,5 @@ public interface MemberService {
 	Date getCurrentDate() throws ParseException;
 	String generateString();
 	String generateRandomString(String source, int length, Random random);
-	Optional<Member> getMemberById(String userId);
 
 }

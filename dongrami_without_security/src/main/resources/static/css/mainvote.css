@@ -4,10 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
-.comment-item{
-	position: absolute;
-	left: 100px;
-}
+
 h1 {
     text-align: center;
 }
@@ -73,6 +70,7 @@ h1 {
     display: flex;
     width: 400px;
     height: 30px;
+    cursor: pointer;
     position: relative;
     border-radius: 5px;
     top: -500px;
@@ -169,41 +167,4 @@ h1 {
     border-radius: 10px; /* 버튼 모서리 둥글게 */
     width: 100px; /* 버튼 너비 */
     height: 50px; /* 버튼 높이 */
-}
-.comment-item {
-    position: absolute;
-    top: 1300px;
-    left: 150px;
-    width: 1000px;
-    height: auto;
-    margin: 20px auto;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px; /* 테두리를 둥글게 만듭니다. */
-    font-family: Arial, sans-serif; /* 글꼴을 지정합니다. */
-    font-size: 16px; /* 글꼴 크기를 조정합니다. */
-    color: #333; /* 글꼴 색상을 지정합니다. */
-    line-height: 1.5; /* 줄간격을 조정합니다. */
-
-}
-#comment-input{
-	 resize: none;
-	 width: 800px;
-}
-#submit1{
-	position: relative;
-   	top: -26px;
-   
-    margin-left: 10px;
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
 }
