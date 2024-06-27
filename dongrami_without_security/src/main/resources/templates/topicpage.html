@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,7 +59,7 @@
 
 	  <div class="content-text">
 	      <div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 1}">
-	          <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	          <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	             th:data-subcategory-id="${subcategory.subcategory_id}"
 	             th:data-click-count="${subcategory.count}">
 	              <div class="content-img">
@@ -71,8 +71,8 @@
 	              </div>
 	          </a>
 	      </div>	
-	  <div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 2}">
-	      <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	  	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 2}">
+	       <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	         th:data-subcategory-id="${subcategory.subcategory_id}"
 	         th:data-click-count="${subcategory.count}">
 	          <div class="content-img">
@@ -85,7 +85,7 @@
 	      </a>
 	  </div>		
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 3}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -98,7 +98,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 4}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -111,7 +111,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 5}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -124,7 +124,7 @@
 	    </a>
 	</div>	
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 7}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -137,7 +137,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 8}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -150,7 +150,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 9}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -163,7 +163,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 10}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -176,7 +176,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 11}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -189,7 +189,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 12}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -202,7 +202,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 13}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -215,7 +215,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 14}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -228,7 +228,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 15}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -241,7 +241,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 16}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -254,7 +254,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 17}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
@@ -267,7 +267,7 @@
 	    </a>
 	</div>
 	<div th:each="subcategory : ${subcategories}" th:if="${subcategory.subcategory_id == 18}">
-	    <a href="#" th:id="'link' + ${subcategory.subcategory_id}"
+	    <a th:href="@{/tarot(subcategory_id=${subcategory.subcategory_id})}" th:id="'link' + ${subcategory.subcategory_id}"
 	       th:data-subcategory-id="${subcategory.subcategory_id}"
 	       th:data-click-count="${subcategory.count}">
 	        <div class="content-img">
