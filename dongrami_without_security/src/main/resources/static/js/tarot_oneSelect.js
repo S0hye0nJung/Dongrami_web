@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const maxScaleRatio = 1.1; // 최대 배율
     const cardDiv = document.getElementById('card1');
     const verticalOffset = 5;
-
+	const showResultButton = document.getElementById('showResultButton');
 
 
     const cards = [];
@@ -152,6 +152,12 @@ document.addEventListener("DOMContentLoaded", function() {
                         selectedCard.element.removeEventListener('mouseout', onMouseOut);
 
                         selectedCard = null;
+                        
+                        // 선택된 카드 수가 3개에 도달했을 때 버튼 표시
+            			if (selectedCount === 1) {
+                			showResultButton.style.display = 'flex';
+            			}
+                        
                     } else if (selectedCount >= 1) {
                         console.log('You have already selected the maximum number of cards.');
                     } else {

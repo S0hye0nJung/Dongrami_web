@@ -29,7 +29,6 @@ public class SubcategoryController {
     public String getSubcategories(Model model) {
         List<Subcategory> subcategories = subcategoryService.getAllSubcategories();
         model.addAttribute("subcategories", subcategories);
-        
         return "topicpage";
     }
 
@@ -39,11 +38,11 @@ public class SubcategoryController {
         
         // Ensure we have at least 5 elements to avoid IndexOutOfBoundsException
         if (top5Subcategories.size() >= 5) {
-            model.addAttribute("ranking1", top5Subcategories.get(0).getBubble_slak_name());
-            model.addAttribute("ranking2", top5Subcategories.get(1).getBubble_slak_name());
-            model.addAttribute("ranking3", top5Subcategories.get(2).getBubble_slak_name());
-            model.addAttribute("ranking4", top5Subcategories.get(3).getBubble_slak_name());
-            model.addAttribute("ranking5", top5Subcategories.get(4).getBubble_slak_name());
+            model.addAttribute("ranking1", top5Subcategories.get(0).getBubble_slack_name());
+            model.addAttribute("ranking2", top5Subcategories.get(1).getBubble_slack_name());
+            model.addAttribute("ranking3", top5Subcategories.get(2).getBubble_slack_name());
+            model.addAttribute("ranking4", top5Subcategories.get(3).getBubble_slack_name());
+            model.addAttribute("ranking5", top5Subcategories.get(4).getBubble_slack_name());
         } else {
             // Handle case where less than 5 elements are returned
             model.addAttribute("ranking1", "");
