@@ -14,7 +14,7 @@ public class SubcategoryDTO {
 	private int subcategory_id;
 	private String subcategory_name;
 	private int count;
-	private String bubble_slak_name;
+	private String bubble_slack_name;
 	private int maincategoryId;
 	
 	public Subcategory toEntity() {
@@ -22,7 +22,7 @@ public class SubcategoryDTO {
 				.subcategory_id(subcategory_id)
 				.subcategory_name(subcategory_name)
 				.count(count)
-				.bubble_slak_name(bubble_slak_name)
+				.bubble_slack_name(bubble_slack_name)
 				.build();
 				
 		

@@ -17,11 +17,13 @@ import com.lec.service.MemberService;
 
 @Service
 public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl{
 
 	@Autowired
 	MemberRepository memberrepository;
 
 	@Override
+	
 	public String join(MemberDTO memberDTO) throws ParseException {
 		
 		Member member = memberDTO.toEntity();
@@ -48,6 +50,7 @@ public class MemberServiceImpl implements MemberService{
 	    }
 
 	@Override
+	
 	// 회원 아이디 - 영문자, 숫자, 영문자&숫자로 이루어진 10글자 반환 
     public String generateString() {
         Random random = new Random();
