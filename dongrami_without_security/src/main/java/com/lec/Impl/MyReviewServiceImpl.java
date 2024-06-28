@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import com.lec.dto.MyReviewDTO;
 import com.lec.entity.Review;
 import com.lec.repository.MyReviewRepository;
-import com.lec.repository.ReviewRepository;
 import com.lec.service.MyReviewService;
 
 import jakarta.transaction.Transactional;
