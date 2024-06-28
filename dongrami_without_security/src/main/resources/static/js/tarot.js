@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const pastDiv = document.getElementById('card_past');
     const presentDiv = document.getElementById('card_present');
     const futureDiv = document.getElementById('card_future');
+    const showResultButton = document.getElementById('showResultButton');
 
     const cards = [];
     let selectedCount = 0; // 선택된 카드 수를 추적하기 위한 변수
@@ -153,12 +154,20 @@ document.addEventListener("DOMContentLoaded", function() {
                         selectedCard.element.removeEventListener('mouseout', onMouseOut);
 
                         selectedCard = null;
-                    } else if (selectedCount >= 1) {
+                        
+                        // 선택된 카드 수가 3개에 도달했을 때 버튼 표시
+            			if (selectedCount === 3) {
+                			showResultButton.style.display = 'flex';
+            			}
+                        
+                    } else if (selectedCount >= 3) {
                         console.log('You have already selected the maximum number of cards.');
                     } else {
                         console.error('No card selected');
                     }
+                    
                 });
+                
             }, i * delayBetweenCards);
         }
     }
