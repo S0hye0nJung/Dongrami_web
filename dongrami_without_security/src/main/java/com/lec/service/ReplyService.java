@@ -1,54 +1,67 @@
-//package com.lec.service;
-//
-//import com.lec.dto.ReplyDTO;
-//import com.lec.entity.Reply;
-//import com.lec.entity.Vote;
-//import com.lec.repository.ReplyRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//
-//import java.time.LocalDate;
-//import java.util.ArrayList;
-//import java.util.HashMap;
-//import java.util.List;
-//import java.util.Map;
-//
-//@Service
-//public class ReplyService {
-//    
-//    @Autowired
-//    private ReplyRepository replyRepository;
-//    public List<Reply> getRepliesForVote(int voteId) {
-//        return replyRepository.findByVoteIdOrderByParentReIdAscReplyCreateAsc(voteId);
-//    }
-//
-//    public Reply addReply(Reply reply) {
-//        reply.setReplyCreate(LocalDate.now());
-//        return replyRepository.save(reply);
-//    }
-//
-//    public List<ReplyDTO> buildReplyTree(List<Reply> replies) {
-//        Map<Long, ReplyDTO> replyMap = new HashMap<>();
-//        List<ReplyDTO> topLevelReplies = new ArrayList<>();
-//
-//        for (Reply reply : replies) {
-//            ReplyDTO dto = convertToDto(reply);
-//            replyMap.put((long) dto.getReplyId(), dto);
-//
-//            if (reply.getLevel() == 1) {
-//                topLevelReplies.add(dto);
-//            } else {
-//                ReplyDTO parent = replyMap.get(reply.getParentReId());
-//                if (parent != null) {
-//                    parent.getChildren().add(dto);
-//                }
-//            }
-//        }
-//
-//        return topLevelReplies;
-//    }
-//
-//    private ReplyDTO convertToDto(Reply reply) {
-//    	return new ReplyDTO(reply);
-//    }
-//}
+package com.lec.service;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.lec.entity.Reply;
+import com.lec.entity.Vote;
+import com.lec.repository.ReplyRepository;
+import com.lec.repository.VoteRepository;
+
+@Service
+public class ReplyService {
+
+    @Autowired
+    private ReplyRepository replyRepository;
+    
+    @Autowired
+    private VoteRepository voteRepository;
+
+    public List<Reply> getAllReplies() {
+        return replyRepository.findAll();
+    }
+
+    public Reply getReplyById(int id) {
+        return replyRepository.findById(id).orElse(null);
+    }
+
+    public List<Reply> getRepliesByVoteId(int voteId) {
+        return replyRepository.findByVoteId(voteId);
+    }
+
+    public Reply createReply(Reply reply) {
+        // Vote 객체가 존재하는지 확인
+        Vote vote = voteRepository.findById(reply.getVote().getVoteId())
+                .orElseThrow(() -> new RuntimeException("Vote not found"));
+        
+        // Reply에 Vote 설정
+        reply.setVote(vote);
+
+        // Reply 저장
+        return replyRepository.save(reply);
+    }
+
+    public Reply updateReply(int id, Reply replyDetails) {
+        Reply reply = replyRepository.findById(id).orElse(null);
+
+        if (reply != null) {
+            reply.setContent(replyDetails.getContent());
+            reply.setLevel(replyDetails.getLevel());
+            reply.setReplyCreate(replyDetails.getReplyCreate());
+            reply.setReplyModify(replyDetails.getReplyModify());
+            reply.setParentReId(replyDetails.getParentReId());
+            reply.setVote(replyDetails.getVote());
+            reply.setMember(replyDetails.getMember());
+            return replyRepository.save(reply);
+        } else {
+            return null;
+        }
+    }
+
+    public void deleteReply(int id) {
+        replyRepository.deleteById(id);
+    }
+}
