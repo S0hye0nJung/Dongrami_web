@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.lec.entity.Subcategory;
 import com.lec.repository.SubcategoryRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class SubcategoryService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SubcategoryService.class);
 	
     @Autowired
     private SubcategoryRepository subcategoryRepository;
@@ -32,5 +36,10 @@ public class SubcategoryService {
     
     public List<Subcategory> getTop5SubcategoriesByCount() {
         return subcategoryRepository.findTop5ByOrderByCountDesc();
+    }
+    
+    public Optional<Subcategory> findById(int id) {
+        logger.debug("Searching for Subcategory with id: {}", id);
+        return subcategoryRepository.findById(id);
     }
 }
