@@ -50,7 +50,7 @@ public class Subcategory {
 	}
 
     
-    public String getBubble_slak_name() {
+    public String getBubble_slack_name() {
         return this.bubble_slack_name;
     }
 
