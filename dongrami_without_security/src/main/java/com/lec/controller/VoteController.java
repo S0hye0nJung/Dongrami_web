@@ -20,8 +20,6 @@ public class VoteController {
 
 	@Autowired
 	private VoteService voteService;
-
-
 	// 모든 투표 리스트 조회
 	@GetMapping
 	public List<Vote> getAllVotes() {
@@ -37,7 +35,7 @@ public class VoteController {
 	// 특정 ID의 투표 조회
 
 	  @GetMapping("/{id}") 
-	  public ResponseEntity<Vote> getVoteById(@PathVariable int id) { 
+	  public ResponseEntity<Vote> getVoteById(@PathVariable("id") int id) { 
 		  Optional<Vote> vote = voteService.getVoteById(id); return
 	  vote.map(ResponseEntity::ok).orElseGet(() ->
 	  ResponseEntity.notFound().build()); 

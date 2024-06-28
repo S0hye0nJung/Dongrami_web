@@ -13,7 +13,7 @@
 		<title>동그라미</title>
 		<link rel="stylesheet" th:href="@{/css/index.css}" />
 		<link rel="stylesheet" th:href="@{/css/nav_footer.css}" />
-		<link rel="stylesheet" media="screen" th:href="@{/css/votepage.css}">
+		<link rel="stylesheet" media="screen" th:href="@{/css/mainvote.css}">
 
 	</head>
 	<body>
@@ -110,14 +110,26 @@
 		          </div>
 		        </div>
 		      </div>
-							 <div id="vote-list"></div>
-								   <div id="pagination"></div>
-		
-								  
-								   
-								   
-					
-					
+	
+			  	<div class="reply-container">	
+			         <div id="vote-list" class="vote-list">
+			         
+			         </div>
+					<div class="comment-container">
+					 <h3>댓글</h2>
+					 <div class="comment-input">
+					 				 <textarea id="commentText" rows="4" placeholder="댓글을 입력하세요..."></textarea>
+					 				<button id="submit" onclick="submitComment()">댓글 등록</button>
+					 </div> 
+			         
+			             <div id="comment-section" class="comment-section">
+			             
+			             </div>
+						 
+			             
+			          
+			     </div>
+				 
 					<footer>
 					  <div class="footer-wrapper">
 					    <div class="footer-company">
@@ -131,7 +143,7 @@
 					        </div>
 					      </div>
 					</footer>
-				
+					
 
 					<!-- Scripts -->
 						<script th:src="@{/js/jquery.min.js}"></script>
@@ -140,7 +152,6 @@
 						<script th:src="@{/js/util.js}"></script>
 						<script th:src="@{/js/mainvote.js}"></script>
 						<script th:src="@{/js/tarot_card.js}"></script>
-
-
+						
 	</body>
 </html>
