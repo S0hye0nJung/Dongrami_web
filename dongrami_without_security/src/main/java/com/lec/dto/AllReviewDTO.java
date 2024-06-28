@@ -1,25 +1,13 @@
 package com.lec.dto;
 
 public class AllReviewDTO {
-    private int reviewId;
     private int rating;
     private String reviewText;
-    private String userId; // varchar 타입
     private int subcategoryId;
-    private int resultId;
-    private String nickname;
-    private String subcategoryName;
+    private String userId; // userId는 String 타입으로 정의해야 합니다.
+    private Integer resultId; // resultId 추가
 
-    // Getters and Setters
-
-    public int getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(int reviewId) {
-        this.reviewId = reviewId;
-    }
-
+    // getters and setters
     public int getRating() {
         return rating;
     }
@@ -36,14 +24,6 @@ public class AllReviewDTO {
         this.reviewText = reviewText;
     }
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public int getSubcategoryId() {
         return subcategoryId;
     }
@@ -52,27 +32,19 @@ public class AllReviewDTO {
         this.subcategoryId = subcategoryId;
     }
 
-    public int getResultId() {
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public Integer getResultId() {
         return resultId;
     }
 
-    public void setResultId(int resultId) {
+    public void setResultId(Integer resultId) {
         this.resultId = resultId;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getSubcategoryName() {
-        return subcategoryName;
-    }
-
-    public void setSubcategoryName(String subcategoryName) {
-        this.subcategoryName = subcategoryName;
     }
 }

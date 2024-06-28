@@ -1,77 +1,64 @@
 package com.lec.Impl;
 
+import com.lec.entity.Member;
+import com.lec.entity.Review;
+import com.lec.repository.AllReviewRepository;
+import com.lec.repository.MemberRepository;
+import com.lec.service.AllReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Optional;
-import java.util.Date;
 import java.util.stream.Collectors;
-import com.lec.entity.AllReview;
-import com.lec.repository.AllReviewRepository;
-import com.lec.service.AllReviewService;
-import com.lec.dto.AllReviewDTO;
 
 @Service
 public class AllReviewServiceImpl implements AllReviewService {
 
     @Autowired
-    private AllReviewRepository reviewRepository;
+    private AllReviewRepository allReviewRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Override
-    public List<AllReviewDTO> getAllReviews() {
-        return reviewRepository.findAll().stream().map(this::convertToDTO).collect(Collectors.toList());
+    @Transactional
+    public Review saveReview(Review review) {
+        entityManager.persist(review); // Review 객체를 저장
+        return review;
     }
 
     @Override
-    public AllReview getReviewById(int id) {
-        return reviewRepository.findById(id).orElse(null);
+    public List<Review> getAllReviewsWithNicknames() {
+        List<Review> reviews = allReviewRepository.findAll(); // 모든 리뷰를 조회
+
+        // 리뷰에 대한 멤버의 닉네임 정보 및 subcategory의 bubble_slack_name 추가
+        return reviews.stream()
+                .peek(review -> {
+                    Member member = memberRepository.findById(review.getMember().getUserId()).orElse(null);
+                    if (member != null) {
+                        review.getMember().setNickname(member.getNickname());
+                    }
+                    review.getSubcategory().setBubble_slack_name(review.getSubcategory().getBubble_slack_name());
+                })
+                .collect(Collectors.toList());
     }
 
+    // 리뷰 ID로 조회하는 메서드 추가
     @Override
-    public AllReview saveReview(AllReview review) {
-        return reviewRepository.save(review);
+    public Review getReviewById(int id) {
+        return allReviewRepository.findById(id).orElse(null);
     }
 
+    // 리뷰 삭제 메서드 구현
     @Override
+    @Transactional
     public void deleteReview(int id) {
-        reviewRepository.deleteById(id);
-    }
-
-    @Override
-    public AllReview updateReview(int id, AllReviewDTO reviewDTO) {
-        Optional<AllReview> optionalReview = reviewRepository.findById(id);
-        if (optionalReview.isPresent()) {
-            AllReview existingReview = optionalReview.get();
-            existingReview.setReviewText(reviewDTO.getReviewText());
-            existingReview.setRating(reviewDTO.getRating());
-            existingReview.setUserId(reviewDTO.getUserId());
-            existingReview.setSubcategoryId(reviewDTO.getSubcategoryId());
-            existingReview.setResultId(reviewDTO.getResultId());
-            existingReview.setNickname(reviewDTO.getNickname());
-            existingReview.setReviewModify(new Date());
-            return reviewRepository.save(existingReview);
-        }
-        return null;
-    }
-
-    private AllReviewDTO convertToDTO(AllReview review) {
-        AllReviewDTO reviewDTO = new AllReviewDTO();
-        reviewDTO.setReviewId(review.getReviewId());
-        reviewDTO.setRating(review.getRating());
-        reviewDTO.setReviewText(review.getReviewText());
-        reviewDTO.setUserId(review.getUserId());
-        reviewDTO.setSubcategoryId(review.getSubcategoryId());
-        reviewDTO.setResultId(review.getResultId());
-        reviewDTO.setNickname(review.getNickname());
-        reviewDTO.setSubcategoryName(getSubcategoryNameById(review.getSubcategoryId()));
-        return reviewDTO;
-    }
-
-    private String getSubcategoryNameById(int subcategoryId) {
-        switch (subcategoryId) {
-            case 1: return "소주제1";
-            case 2: return "소주제2";
-            default: return "알 수 없는 소주제";
-        }
+        allReviewRepository.deleteById(id);
     }
 }
