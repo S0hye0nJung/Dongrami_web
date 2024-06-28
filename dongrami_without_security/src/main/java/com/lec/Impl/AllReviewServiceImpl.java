@@ -44,7 +44,7 @@ public class AllReviewServiceImpl implements AllReviewService {
                     if (member != null) {
                         review.getMember().setNickname(member.getNickname());
                     }
-                    review.getSubcategory().setBubble_slak_name(review.getSubcategory().getBubble_slak_name());
+                    review.getSubcategory().setBubble_slack_name(review.getSubcategory().getBubble_slack_name());
                 })
                 .collect(Collectors.toList());
     }
