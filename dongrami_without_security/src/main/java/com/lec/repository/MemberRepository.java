@@ -7,5 +7,8 @@ import com.lec.entity.Member;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, String>{
-
+  
+    // 추가된 메서드
+    Member findByNickname(String nickname);
+}
 }
