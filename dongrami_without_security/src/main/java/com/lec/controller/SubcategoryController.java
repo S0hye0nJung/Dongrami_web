@@ -29,6 +29,7 @@ public class SubcategoryController {
     public String getSubcategories(Model model) {
         List<Subcategory> subcategories = subcategoryService.getAllSubcategories();
         model.addAttribute("subcategories", subcategories);
+        
         return "topicpage";
     }
 

@@ -7,7 +7,6 @@ import java.util.*;
 import com.lec.dto.WebReadingDTO;
 import com.lec.entity.Member;
 import com.lec.entity.WebReading;
-import com.lec.entity.SavedResult;
 
 @Repository
 public interface ResultRepository extends JpaRepository<WebReading, Integer> {
@@ -107,14 +106,7 @@ public interface ResultRepository extends JpaRepository<WebReading, Integer> {
 //           "LIMIT 1", nativeQuery = true)
 //    List<Object[]> findRandomCardReadings(@Param("subcategoryId") int subcategoryId);
 	
-     // 추가된 코드 시작
-     @Repository
-     public interface SavedResultRepository extends JpaRepository<SavedResult, Integer> {
-     }
-     // 추가된 코드 끝
-     
-     
-     
+    
 }
 
 
