@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,10 +14,14 @@ import com.lec.dto.MemberDTO;
 import com.lec.entity.Member;
 import com.lec.repository.MemberRepository;
 import com.lec.service.MemberService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Service
 public class MemberServiceImpl implements MemberService{
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberServiceImpl.class);
 
 	@Autowired
 	MemberRepository memberrepository;
@@ -66,4 +71,19 @@ public class MemberServiceImpl implements MemberService{
         }
         return sb.toString();
     }
+	
+	
+    @Override
+    public Optional<Member> getMemberById(String userId) {
+        // TODO Auto-generated method stub
+        return Optional.empty();
+    }
+
+    // 추가된 메서드
+    @Override
+    public Member findByNickname(String nickname) {
+        logger.debug("Searching for Member with nickname: {}", nickname);
+        return memberrepository.findByNickname(nickname);
+    }
 }
+
