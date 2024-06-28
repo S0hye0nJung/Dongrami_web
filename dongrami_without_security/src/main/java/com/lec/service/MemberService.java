@@ -12,5 +12,6 @@ public interface MemberService {
 	Date getCurrentDate() throws ParseException;
 	String generateString();
 	String generateRandomString(String source, int length, Random random);
+	
 
 }

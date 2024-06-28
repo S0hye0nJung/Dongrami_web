@@ -32,7 +32,7 @@ public class Subcategory {
 	private int count;
 	
 	@Column(name="bubble_slack_name")
-	private String bubble_slak_name;
+	private String bubble_slack_name;
 	
 	@ManyToOne
     @JoinColumn(name = "maincategory_id", referencedColumnName = "maincategory_id", nullable = false)
@@ -40,18 +40,18 @@ public class Subcategory {
 
 
 	@Builder
-	public Subcategory(int subcategory_id, String subcategory_name, int count, String bubble_slak_name, Maincategories maincategory) {
+	public Subcategory(int subcategory_id, String subcategory_name, int count, String bubble_slack_name, Maincategories maincategory) {
 		super();
 		this.subcategory_id = subcategory_id;
 		this.subcategory_name = subcategory_name;
 		this.count = count;
-		this.bubble_slak_name = bubble_slak_name;
+		this.bubble_slack_name = bubble_slack_name;
 		this.maincategory = maincategory;
 	}
 
     
     public String getBubble_slak_name() {
-        return this.bubble_slak_name;
+        return this.bubble_slack_name;
     }
 
 

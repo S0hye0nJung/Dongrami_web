@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
             bubbleTexts.forEach((bubbleText, index) => {
                 if (data.length > index) {
-                    bubbleText.textContent = data[index].bubble_slak_name;
+                    bubbleText.textContent = data[index].bubble_slack_name;
                 } else {
                     bubbleText.textContent = ''; // 데이터가 없을 경우 빈 문자열로 설정
                 }
