@@ -6,7 +6,7 @@
   <link rel="stylesheet" th:href="@{/css/myreview.css}">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <title>My Page</title>
+  <title>My ReviewPage</title>
 </head>
 <body>
 	<header>
@@ -51,6 +51,7 @@
 	        </button>
 	        <span id="selected-count">0/10 선택</span>
 	    </div>
+	    <div id="total-count">총 댓글: 0개</div> <!-- 총 댓글 수 표시 -->
 	    <div id="comment-section">
 	        <!-- Comments will be dynamically inserted here -->
 	    </div>
@@ -86,15 +87,34 @@
 	<div id="editModal" class="modal">
 	    <div class="modal-content">
 	        <span class="close">&times;</span>
-	        <h2>리뷰 수정</h2>
+	        <h2>타로와 함께한 시간!</h2>
+	        <p>동그라미가 어떤 이야기를 속삭였나요? 당신의 경험을 알려주세요!</p>           
 	        <form id="edit-form">
-	            <label for="edit-review-text">리뷰 내용:</label>
-	            <textarea id="edit-review-text" name="reviewText" rows="4" required></textarea>
-	            <label for="edit-rating">평점:</label>
-	            <input type="number" id="edit-rating" name="rating" min="1" max="5" required>
+	            <div class="review-details">
+					<div class="review-user">
+					    <img src="images/user-avatar.png" alt="User Avatar" class="user-avatar">
+					    <div class="user-info">
+					        <span class="user-name">닉네임</span>
+					        <span class="user-role">직책</span>
+					    </div>
+					</div>
+	                <!-- ID 수정 확인 -->
+	                <div id="edit-rating" class="rating">
+	                    <label for="rating">평점 <span id="edit-rating-score" class="rating-score">0점</span></label>
+	                    <div id="edit-stars">
+	                        <span class="star">&#9733;</span>
+	                        <span class="star">&#9733;</span>
+	                        <span class="star">&#9733;</span>
+	                        <span class="star">&#9733;</span>
+	                        <span class="star">&#9733;</span>
+	                    </div>
+	                </div>
+	            </div>
+	            <textarea id="edit-review-text" name="reviewText" placeholder="100자 미만 작성해주세요"></textarea>
+	            <div id="edit-character-count">0/100</div>
 	            <input type="hidden" id="edit-review-id" name="reviewId">
-	            <button type="submit">저장</button>
-	            <button type="button" id="cancel-edit">취소</button>
+	            <input type="hidden" id="edit-rating-score-value" name="ratingScore" value="5">
+	            <button type="submit" id="submit-review">리뷰 수정 완료</button>
 	        </form>
 	    </div>
 	</div>

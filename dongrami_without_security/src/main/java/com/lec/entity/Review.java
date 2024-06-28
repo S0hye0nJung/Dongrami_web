@@ -19,6 +19,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
+@Table(name = "review")
 @Entity(name = "review")
 public class Review {
 

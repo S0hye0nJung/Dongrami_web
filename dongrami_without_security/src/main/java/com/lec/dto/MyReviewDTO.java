@@ -19,12 +19,14 @@ public class MyReviewDTO {
     private String mainCategoryName;
     private String reviewText;
     private Date reviewCreate;
+    private int rating; // 추가된 rating 필드
 
     @Builder
-    public MyReviewDTO(int reviewId, String mainCategoryName, String reviewText, Date reviewCreate) {
+    public MyReviewDTO(int reviewId, String mainCategoryName, String reviewText, Date reviewCreate, int rating) {
         this.reviewId = reviewId;
         this.mainCategoryName = mainCategoryName;
         this.reviewText = reviewText;
         this.reviewCreate = reviewCreate;
+        this.rating = rating; // 빌더에도 rating 추가
     }
 }

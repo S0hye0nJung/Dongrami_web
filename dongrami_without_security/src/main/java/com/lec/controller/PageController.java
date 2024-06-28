@@ -34,7 +34,10 @@ public class PageController {
     public String loginPage() {
         return "login";
     }
-    
+    @GetMapping("/mainvote")
+    public String mainvote() {
+    	return "mainvote";
+    }
     @GetMapping("/vote")
     public String votePage() {
         return "votepage";
@@ -43,6 +46,11 @@ public class PageController {
     @GetMapping("/myreview")
     public String myReview() {
     	return "myreview";
+    }
+    
+    @GetMapping("/mytarotlist")
+    public String myTarotList() {
+    	return "mytarotlist";
     }
     
 }
