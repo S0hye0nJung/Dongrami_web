@@ -13,7 +13,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class SubcategoryService {
-	
+    
     @Autowired
     private SubcategoryRepository subcategoryRepository;
 
@@ -32,5 +32,10 @@ public class SubcategoryService {
     
     public List<Subcategory> getTop5SubcategoriesByCount() {
         return subcategoryRepository.findTop5ByOrderByCountDesc();
+    }
+
+    // 추가된 메서드
+    public Optional<Subcategory> findById(int id) {
+        return subcategoryRepository.findById(id);
     }
 }
