@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const rating = review.rating ? review.rating : 0;
             const nickname = review.memberNickname || '닉네임';
             const subcategoryName = review.subcategory.bubble_slack_name || '소주제';
-            const subcategoryId = review.subcategory.subcategory_id; // 여기서 subcategoryId 값을 가져옵니다.
+            const subcategoryId = review.subcategory.subcategoryId; // 여기서 subcategoryId 값을 가져옵니다.
             const reviewCard = document.createElement('div');
             reviewCard.className = 'review-card';
             reviewCard.innerHTML = `
@@ -191,10 +191,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         const updatedReview = {
-            rating: parseInt($('#ratingScore').val()),
-            reviewText: $('#review-text').val(),
+            rating: parseInt($('#ratingScore').val()) || 0,
+            reviewText: $('#review-text').val() || "",
             userId: '1', // 실제 유저 아이디로 설정
-            subcategoryId: subcategoryId, // 가져온 subcategoryId 값을 설정합니다.
+            subcategoryId: parseInt(subcategoryId) || 0, // 가져온 subcategoryId 값을 설정합니다.
             resultId: 1 // 실제 결과 아이디로 설정
         };
         $.ajax({
