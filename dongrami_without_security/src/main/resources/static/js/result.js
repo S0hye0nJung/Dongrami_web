@@ -1,11 +1,27 @@
 $(document).ready(function() {
+    // URL에서 subcategoryId 추출
+    const urlParams = new URLSearchParams(window.location.search);
+    const subcategoryId = urlParams.get('subcategory_id'); // URL에서 subcategory_id 값을 가져옴
+
     // 사용자의 닉네임을 가져오기
     const userId = 1; // 실제 사용자 ID 데이터를 사용해야 합니다.
-    const subcategoryId = 1; // 실제 소분류 ID 데이터를 사용해야 합니다.
     const resultId = 1; // 실제 결과 ID 데이터를 사용해야 합니다.
 
     // 리뷰 쓰기 버튼 클릭 시 모달 열기
     $('#write-review').on('click', function() {
+        // 서버에서 bubble_slack_name 가져오기
+        $.ajax({
+            type: 'GET',
+            url: `/allreview/subcategory/${subcategoryId}/bubbleSlackName`,
+            success: function(response) {
+                $('.user-role').text('#' + response.bubbleSlackName); // bubble_slack_name 설정
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('에러 메시지:', textStatus, errorThrown);
+                alert('정보를 가져오는 데 실패했습니다.');
+            }
+        });
+
         $('#review-modal').css('display', 'block');
         $('#rating .star').addClass('selected'); // 기본으로 모든 별을 채운 상태로 설정
         $('.rating-score').text('5점'); // 기본 점수를 5점으로 설정
@@ -47,12 +63,33 @@ $(document).ready(function() {
         $('#character-count').text(`${currentLength}/${maxLength}`);
     });
 
+    function showModalMessage(header, message) {
+        const modalHtml = `
+            <div id="message-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="document.getElementById('message-modal').style.display='none'">&times;</span>
+                    <h2>${header}</h2>
+                    <p>${message}</p>
+                </div>
+            </div>
+        `;
+        $('body').append(modalHtml);
+        $('#message-modal').css('display', 'block');
+
+        // 모달 바깥 클릭 시 모달 닫기
+        $(window).on('click', function(event) {
+            if ($(event.target).is('#message-modal')) {
+                $('#message-modal').remove();
+            }
+        });
+    }
+
     // 리뷰 제출 버튼 클릭 시 처리 로직
     $('#submit-review').on('click', function(e) {
         e.preventDefault(); // 폼 제출 중지
 
         const reviewText = $('#review-text').val();
-        const ratingScore = $('.rating-score').text().replace('점', '');
+        const ratingScore = $('#ratingScore').val();
 
         if (!reviewText) {
             alert('리뷰 내용을 작성해주세요.');
@@ -68,20 +105,20 @@ $(document).ready(function() {
         // 폼 데이터를 서버로 전송
         $.ajax({
             type: 'POST',
-            url: '/submitReview',
+            url: '/allreview/submit', // 수정된 URL
             contentType: 'application/json',
             dataType: 'json',
             data: JSON.stringify({
-                user_id: userId,
-                subcategory_id: subcategoryId,
-                result_id: resultId,
+                userId: userId, // 키 이름 수정
+                subcategoryId: subcategoryId, // 키 이름 수정
+                resultId: resultId, // 키 이름 수정
                 rating: ratingScore,
-                review_text: reviewText
+                reviewText: reviewText // 키 이름 수정
             }),
             success: function(response) {
                 console.log('서버 응답:', response);
-                alert('리뷰가 성공적으로 제출되었습니다.');
                 $('#review-modal').css('display', 'none'); // 모달 창 닫기
+                showModalMessage('리뷰 작성이 완료되었습니다!', '마이페이지에서 확인하실 수 있습니다!');
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log('에러 메시지:', textStatus, errorThrown);
@@ -90,34 +127,29 @@ $(document).ready(function() {
         });
     });
 
-    // 추가된 코드 시작
-    const subcategoryName = "타로 소주제"; // 현재 페이지의 소주제 이름 (임의로 설정)
-    const currentUserNickname = '현재 사용자 닉네임'; // 실제 로그인된 사용자 닉네임으로 변경
-    $('.user-role').text('#' + subcategoryName); // 소주제 설정
+    // 저장 버튼 클릭 시 처리 로직
+    $('#save-result').on('click', function(e) {
+        e.preventDefault(); // 폼 제출 중지
 
-    $.ajax({
-        type: 'POST',
-        url: '/api/reviews/submit',
-        contentType: 'application/json',
-        dataType: 'json',
-        data: JSON.stringify({
-            userId: userId,
-            subcategoryId: subcategoryId,
-            resultId: resultId,
-            rating: ratingScore,
-            reviewText: reviewText,
-            nickname: currentUserNickname,
-            subcategoryName: subcategoryName
-        }),
-        success: function(response) {
-            alert('리뷰가 성공적으로 제출되었습니다.');
-            $('#review-modal').css('display', 'none'); // 모달 창 닫기
-            fetchReviews(); // 리뷰 페이지의 fetchReviews 함수를 호출하여 업데이트
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log('에러 메시지:', textStatus, errorThrown);
-            alert('리뷰 제출에 실패했습니다. 다시 시도해주세요. \n' + textStatus + ': ' + errorThrown);
-        }
+        // 결과 저장 데이터를 서버로 전송
+        $.ajax({
+            type: 'POST',
+            url: '/allreview/saveResult', // 결과 저장 URL
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify({
+                userId: userId, // 키 이름 수정
+                subcategoryId: subcategoryId, // 키 이름 수정
+                resultId: resultId, // 키 이름 수정
+            }),
+            success: function(response) {
+                console.log('서버 응답:', response);
+                showModalMessage('타로 결과가 저장되었습니다!', '마이페이지에서 확인하실 수 있습니다!');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log('에러 메시지:', textStatus, errorThrown);
+                alert('결과 저장에 실패했습니다. 다시 시도해주세요. \n' + textStatus + ': ' + errorThrown);
+            }
+        });
     });
-    // 추가된 코드 끝
 });
